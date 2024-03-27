@@ -1,6 +1,5 @@
-# Pulling Median MFI from Xponent csv file. Please see datakey for GoogleDrive/R conversion. 
+# Pulling Median MFI from Xponent csv file. Please see datakey for GoogleDrive/R filename conversion. 
 # Keep raw data files within the Luminex/raw data folder.  
-
 
 # Directory (raw Xponent data) and Loop initiation ----
 directory <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/raw/luminex/"
@@ -11,7 +10,7 @@ directory <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/raw/lum
     # Loop through each CSV file
     for (file_path in csv_files) {
 
-# File Extraction, initial triming for MFI data ---- 
+# File Extraction, initial triming, BSA subtraction for MFI data ---- 
       lines <- readLines(file_path)
       
   # Median MFI trimming by rows: Below "Median" and two above "Net MFI"    
@@ -30,18 +29,57 @@ directory <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/raw/lum
       # Create a data frame
       results_df <- read.csv(text = paste(data_lines, collapse = "\n"), na.strings = "")
                 
-#Trimming results_data (remove well, Total reactions), adding Plate column, ----
-  # Filter out columns between "Location" and "Total.Events"
+#Trimming results_data , adding columns (Plate, Site), editing serology names  ----
+  # Creation of results_df: Filter out columns between "Location" and "Total.Events"
         location_index <- grep("Location", colnames(results_df))
         total_events_index <- grep("Total.Events", colnames(results_df))
         columns_to_keep <- (location_index + 1):(total_events_index - 1)
         
         results_df <- results_df[, columns_to_keep]
-  
-  # Add a column named "Plate" containing the CSV file name without the extension
+        
+  # BSA Subtraction
+        # Assuming BSA column index is known
+        bsa_index <- grep("BSA", colnames(results_df))
+        
+              # Store the BSA column separately
+              bsa_values <- results_df[, bsa_index]
+        
+        # Identify numerical columns excluding BSA
+        nonBSA_numerical_columns <- sapply(results_df[, -bsa_index], is.numeric)
+        
+        # Subtract BSA from numerical columns
+        results_df[, nonBSA_numerical_columns] <- results_df[, nonBSA_numerical_columns] - bsa_values
+        
+          # Reinsert the BSA column
+          results_df[, bsa_index] <- bsa_values
+        
+        
+  # Add "Plate" column containing the CSV file name without the extension
           file_name <- basename(file_path)
           file_name_without_ext <- tools::file_path_sans_ext(file_name)
     results_df$Plate <- file_name_without_ext
+    
+    # Adding "Site" column and serology type to numerical column names
+          # Split Plate column by "_"
+          plate_split <- strsplit(as.character(results_df$Plate), "_")
+          
+          # Extract the second part ("serology")
+          serology <- sapply(plate_split, function(x) x[2])
+          
+          # Add "serology" to the numerical column names
+          numerical_columns <- sapply(results_df, is.numeric)
+          numerical_column_names <- names(results_df)[numerical_columns]
+          
+          new_numerical_column_names <- paste0(serology, "_", numerical_column_names)
+          
+          # Rename the numerical columns
+          names(results_df)[numerical_columns] <- new_numerical_column_names
+          
+          # Extract the text prior to the first "_"
+          site <- sapply(plate_split, function(x) x[1])
+          
+          # Add the "Site" column to the dataframe
+          results_df$Site <- site
 
 # File Export w/ Plate names in data/clean/luminex----
     
