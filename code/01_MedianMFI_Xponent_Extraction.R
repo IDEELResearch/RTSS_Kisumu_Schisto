@@ -52,34 +52,31 @@ directory <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/raw/lum
         
           # Reinsert the BSA column
           results_df[, bsa_index] <- bsa_values
-        
-        
-  # Add "Plate" column containing the CSV file name without the extension
-          file_name <- basename(file_path)
-          file_name_without_ext <- tools::file_path_sans_ext(file_name)
-    results_df$Plate <- file_name_without_ext
-    
-    # Adding "Site" column and serology type to numerical column names
+
+     # Adding serology type to numerical column names, Plate column (Plate_Serology)
+          # CSV file name without the extension
+              file_name <- basename(file_path)
+              file_name_without_ext <- tools::file_path_sans_ext(file_name)
+          
+          
           # Split Plate column by "_"
-          plate_split <- strsplit(as.character(results_df$Plate), "_")
+              plate_split <- strsplit(as.character(file_name_without_ext), "_")
           
           # Extract the second part ("serology")
-          serology <- sapply(plate_split, function(x) x[2])
+              serology <- sapply(plate_split, function(x) x[2])
           
-          # Add "serology" to the numerical column names
-          numerical_columns <- sapply(results_df, is.numeric)
-          numerical_column_names <- names(results_df)[numerical_columns]
+          # Add serology type to the numerical column names
+              numerical_columns <- sapply(results_df, is.numeric)
+              numerical_column_names <- names(results_df)[numerical_columns]
+              
+              new_numerical_column_names <- paste0(serology, "_", numerical_column_names)
+              
+              # Rename the numerical columns
+              names(results_df)[numerical_columns] <- new_numerical_column_names
           
-          new_numerical_column_names <- paste0(serology, "_", numerical_column_names)
+          # Add Plate_serology type column
+              results_df[[paste0("Plate_", serology)]] <- file_name_without_ext
           
-          # Rename the numerical columns
-          names(results_df)[numerical_columns] <- new_numerical_column_names
-          
-          # Extract the text prior to the first "_"
-          site <- sapply(plate_split, function(x) x[1])
-          
-          # Add the "Site" column to the dataframe
-          results_df$Site <- site
 
 # File Export w/ Plate names in data/clean/luminex----
     
