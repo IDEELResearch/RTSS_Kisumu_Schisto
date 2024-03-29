@@ -1,4 +1,7 @@
-# Pulling Median MFI from Xponent csv file. Please see datakey for GoogleDrive/R filename conversion. 
+# Author: Sahal Thahir
+# Date: 2024-03-24
+# Description: This script extracts Median MFI data from raw csv outputs from Luminex Xponent w/ BSA subtraction
+
     # Required libraries
     library(tidyverse)
 
@@ -40,21 +43,24 @@ directory <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/raw/lum
         results_df <- results_df[, columns_to_keep]
         
      # BSA Subtraction
-        # Assuming BSA column index is known
-        bsa_index <- grep("BSA", colnames(results_df))
-        
-              # Store the BSA column separately
-              bsa_values <- results_df[, bsa_index]
-        
-        # Identify numerical columns excluding BSA
-        nonBSA_numerical_columns <- sapply(results_df[, -bsa_index], is.numeric)
-        
-        # Subtract BSA from numerical columns
-        results_df[, nonBSA_numerical_columns] <- results_df[, nonBSA_numerical_columns] - bsa_values
-        
-          # Reinsert the BSA column
-          results_df[, bsa_index] <- bsa_values
-
+           # Assuming BSA column index is known
+            bsa_index <- grep("BSA", colnames(results_df))
+            
+                  # Store the BSA column separately
+                  bsa_values <- results_df[, bsa_index]
+                  
+                  # Identify numerical columns excluding BSA
+                  nonBSA_numerical_columns <- sapply(results_df[, -bsa_index], is.numeric)
+            
+            # Subtract BSA from numerical columns
+            results_df[, nonBSA_numerical_columns] <- results_df[, nonBSA_numerical_columns] - bsa_values
+              
+                  # Reinsert the BSA column
+                  results_df[, bsa_index] <- bsa_values
+                  
+            # All negative MFIs to zero
+                  results_df[results_df < 0] <- 0
+            
      # Adding serology type to numerical column names, Plate column (Plate_Serology)
           # CSV file name without the extension
               file_name <- basename(file_path)

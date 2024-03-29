@@ -1,4 +1,7 @@
-#Stitching Luminex data together
+# Author: Sahal Thahir
+# Date: 2024-03-28
+# Description: This script compiles all cleaned data from RTSS luminex studies 
+
 library(tidyverse)
 
 # Directory
@@ -44,7 +47,7 @@ directory <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/clean/l
       rtss_df <- mutate(rtss_df, across(where(function(x) !is.numeric(x)), as.character))
       
 
-# Study participant RID 
+  # Study participant RID 
           # Sample RX(C/M)-### should become RID RX-###
                 extract_rid <- function(sample) {
                   # Use regular expression to extract the RID
@@ -55,8 +58,29 @@ directory <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/clean/l
           # Apply the function to the Sample column and create a new column called "RID"
           rtss_df <- rtss_df %>%
             mutate(RID = extract_rid(Sample))
+          
           # Reorder the columns with RID at the front
           rtss_df <- rtss_df %>%
             select(RID, everything())
+          
+  # Timepoint
+          # Add "-M01" to maternal sample IDs
+           rtss_df <- rtss_df %>%
+            mutate(Sample = ifelse(grepl("M", Sample) & !grepl("-M01", Sample), paste(Sample, "-M01", sep = ""), Sample))
+          
+          
+          # Create a column called Timepoint
+          rtss_df <- rtss_df %>%
+            mutate(Timepoint = str_split(Sample, "-") %>% 
+                     sapply(function(x) x[3]))  # Extracting the third part after splitting by '-'
+              
+              # Move Timepoint to after RID
+                  rtss_df <- rtss_df %>%
+                    select(RID, Timepoint, everything())
 
-        
+# rtss_df export
+       # File path for export
+          file_path <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/clean/luminex/RTSS_Luminex_comp.csv"
+                  
+      # Dataframe export
+            write.csv(rtss_df, file = file_path, row.names = FALSE)

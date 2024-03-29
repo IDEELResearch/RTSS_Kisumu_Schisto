@@ -16,17 +16,21 @@ Sahal Thahir [sahal\@ad.unc.edu](mailto:sahal@ad.unc.edu){.email} (703)344-6153
 #### 02_DataMeld_Luminex
 
 -   Study specific: compiles all samples from "clean" luminex data folder based on sample type (all_plates_df)
--   Links maternal/infant samples by creating a shared "RID"
--   Extracts Timepoint from name (Maternal samples termed "M01")
--   Maintains Plate names for each sample run (\$Plates_Serologytype)
+-   Compiles all sample data into single rows (rtss_df and rtss_luminex.csv).
+    -   All multiple antigen-serology MFI data are averaged.
+    -   Links maternal/infant samples by creating a shared "RID"
+    -   Extracts Timepoint from name (Maternal samples termed "M01")
+    -   Maintains Plate names for each sample run (\$Plates_Serologytype)
 
 ## Results
 
 -   Nothing yet
 
 ## Data
-Data is not included in the github folder though available on request. 
+
+Data is not included in the github folder though available on request.
 
 #### Luminex
+
 -   Raw: contains renamed csvs from Angela's google drive folder. Currently just MagPix data from Kisumu
 -   Clean: outputs from initial extraction, melded RTSS sample data
