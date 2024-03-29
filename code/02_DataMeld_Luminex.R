@@ -34,15 +34,15 @@ directory <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/clean/l
       }
 
 # Create rtss_df: All study participant samples with Sample value starting with "R"
-    rtss_df <- all_plates_df %>%
-      filter(grepl("^R", Sample)) %>%
-      group_by(Sample) %>%
-      summarise(across(everything(), summary_function))
-    
-          # Replace "Na", "NA" and "NaN" with blanks in numerical columns
-          rtss_df <- rtss_df %>%
-            mutate_all(~ifelse(. %in% c("Na", "NA", "NaN"), "", .))
-          
+      # Create rtss_df: All study participant samples with Sample value starting with "R"
+      rtss_df <- all_plates_df %>%
+        filter(grepl("^R", Sample)) %>%
+        group_by(Sample) %>%
+        mutate(across(everything(), ~ if (is.numeric(.)) replace(., . == "NaN", NA) else .))
+      
+      # Convert any non-numeric columns to their original class
+      rtss_df <- mutate(rtss_df, across(where(function(x) !is.numeric(x)), as.character))
+      
 
 # Study participant RID 
           # Sample RX(C/M)-### should become RID RX-###
@@ -55,6 +55,8 @@ directory <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/clean/l
           # Apply the function to the Sample column and create a new column called "RID"
           rtss_df <- rtss_df %>%
             mutate(RID = extract_rid(Sample))
+          # Reorder the columns with RID at the front
+          rtss_df <- rtss_df %>%
+            select(RID, everything())
 
-
-    
+        
