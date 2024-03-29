@@ -65,22 +65,20 @@ directory <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/clean/l
           
   # Timepoint
           # Add "-M01" to maternal sample IDs
-           rtss_df <- rtss_df %>%
+          rtss_df <- rtss_df %>%
             mutate(Sample = ifelse(grepl("M", Sample) & !grepl("-M01", Sample), paste(Sample, "-M01", sep = ""), Sample))
           
+          # Create Timepoint from Sample 
+          rtss_df$Timepoint <- sapply(strsplit(rtss_df$Sample, "-"), function(x) x[3])
           
-          # Create a column called Timepoint
-          rtss_df <- rtss_df %>%
-            mutate(Timepoint = str_split(Sample, "-") %>% 
-                     sapply(function(x) x[3]))  # Extracting the third part after splitting by '-'
-              
+       
               # Move Timepoint to after RID
                   rtss_df <- rtss_df %>%
                     select(RID, Timepoint, everything())
 
 # rtss_df export
        # File path for export
-          file_path <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/clean/luminex/RTSS_Luminex_comp.csv"
+          file_path <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/clean/RTSS_Luminex_comp.csv"
                   
       # Dataframe export
             write.csv(rtss_df, file = file_path, row.names = FALSE)
