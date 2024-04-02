@@ -21,16 +21,18 @@ Sahal Thahir [sahal\@ad.unc.edu](mailto:sahal@ad.unc.edu){.email} (703)344-6153
     -   Links maternal/infant samples by creating a shared "RID"
     -   Extracts Timepoint from name (Maternal samples termed "M01")
     -   Maintains Plate names for each sample run (\$Plates_Serologytype)
+    
+#### 03-Standardization_Luminex_Curves
+-   Utilizes all_plates_df from 02, pulls standards data
+-   Creates plots for each antigen for IgG1, IgG3, Total IgG, IgA1/2. 
 
 ## Results
-
--   Nothing yet
+-  pending
 
 ## Data
-
-Data is not included in the github folder though available on request.
+- Data is not included in the github folder though available on request.
+- Datakeys are in excel form (uploaded)
 
 #### Luminex
-
 -   Raw: contains renamed csvs from Angela's google drive folder. Currently just MagPix data from Kisumu
 -   Clean: outputs from initial extraction, melded RTSS sample data
