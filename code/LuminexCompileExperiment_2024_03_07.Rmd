@@ -1,0 +1,207 @@
+---
+title: "Lumix Compile EXperment (Plates and Conditions)"
+output:
+  html_document: default
+  pdf_document: default
+date: "2024-03-07"
+---
+
+```{r setup, include=FALSE}
+
+
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_knit$set()
+print ("working directory is: ")
+getwd()
+```
+
+### R Markdown
+
+This is an R Markdown document. See Code for details.
+
+```{=html}
+<!-- *Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. #When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this with `and`* /
+--->
+```
+```{=html}
+<!--
+DEVELOPER NOTES
+#useful links BSA corrected-- <https://docs.google.com/spreadsheets/d/1kFEW7UqGGvfmOtYQq_AdP3V2w7LwdhDLpTHPmPaJGnM/edit#gid=1434210263>
+
+#TODO: potential transplate normalization based on standards
+
+-->
+```
+### Load needed libraries
+
+```{r}
+library(tidyverse)
+```
+
+# Luminex Compile Experiment
+
+This code allows a user to compile luminex xPONENT output for an overall experiment across multiple conditions and plates.
+
+## Overview
+
+In general a PLATE should contain the same samples with multiple runs being determined based on the antibody Suggested plate nomenclature going forward would be:
+
+CONDITION_PLATE#\_YYYY-MM-DD-INITIALS.csv , e.g. IgG1_PLATE1_2024-03-07_JAB.csv
+
+## Set Input Parameters and Data
+
+This code chunk allows you to set input data
+
+```{r}
+##set default variables ###
+projectname ="BLTEST"
+rawdir = "EBL_RawData"  #<- the directory with the 'raw' exported xPONENT files appropriately named
+platelist = c("PLATE1","PLATE2") #the plates to include in the analysis 
+#note conditions can be selected but you can simply limit them by moving files into another directory
+samplelistfile=c("SampleList_metadata.tsv")  #this is the mappoing of the PlateIDs (#s) --> SampleIDs
+
+### DATA CLEANING 
+#all names will be change to Upper Case and spaces will be changed to dashes (-)
+#you can then add to the below to map names to new names to fix inconsistencies in naming
+namefixes = c(
+  "BLANK" ~ "BACKGROUND0"  ,
+  "1832" ~ "HC-189K",
+  "534." ~ "MBL-179",
+  "589*" ~ "BL736",
+  "MALE-EBV-NEG" ~ "EBV-MALE-NEG",
+  "FEMALE-EBV-NEG" ~ "EBV-FEMALE-NEG",
+  "AF-S1" ~ "AF-MIX-S1",
+  "AF-S2" ~ "AF-MIX-S2",
+  "AF-S3" ~ "AF-MIX-S3",
+  "AF-S4" ~ "AF-MIX-S4",
+  "AF-S5" ~ "AF-MIX-S5",
+  "AF-S6" ~ "AF-MIX-S6",
+  "AF-S7" ~ "AF-MIX-S7",
+  "POST-VAC-S6"~ "POST-VACC-S6"
+) 
+
+# this list allows you to select samples to delete from the overall table.  
+deletesamples = c(
+  "479",
+  "CSP-OLD-BEAD-MIX-S1",
+  "CSP-OLD-BEAD-MIX-S2",
+  "CSP-OLD-BEAD-MIX-S3",
+  "CSP-OLD-BEAD-MIX-S4",
+  "CSP-OLD-BEAD-MIX-S5",
+  "CSP-OLD-BEAD-MIX-S6",
+  "CSP-OLD-BEAD-MIX-S7"
+)
+
+
+```
+
+## Read Sample list
+
+The sample list must have PlateID -that can map to SampleID columns to allow for proper mapping. If you have no renaming to do (plates all contain SampleID already) then just use file with these columns but no rows.
+
+```{r}
+#load the sample list
+samplelist=read_tsv(samplelistfile, col_types="c")
+print (samplelist)
+
+if ( !("PlateID" %in% names(samplelist) & "SampleID" %in% names(samplelist))  ) {
+  cat ("Column Names", names(samplelist))
+  stop ("Either PlateID or SampleID is missing from samplelist file!")
+}
+
+```
+
+```{r}
+outputdir=paste0(projectname,"_compiled_output")
+if (!file.exists(outputdir) ) { dir.create(outputdir) }
+unlink( paste0( outputdir,"/*sv"))  #remove all csv and tsv files
+```
+
+## Code Chunk Processing Plates (Main Routine)
+
+This chunk does the main work. It will create the merged tsvs into the compiled output directory as well as save individual files and compiled plates for potential inspection.
+
+-   reads in the median values of each plate from raw xPONENT file from machine
+-   changes names – all CAPS and spaces to dashes
+-   uses the samplelist to rename unique Plate IDs to unique experiment Sample IDs
+-   removes any sample ID rows not needed
+-   merges conditions across plates and then plates
+
+```{r}
+ #this code will extract plate data 
+ftib<-NULL
+#loop through the individual plates
+for (plate in platelist) {
+  rawfilelist<-list.files(rawdir, plate)
+  cat ("loading ",plate, rawfilelist, "\n\n")
+  #process all the different conditions/secondary treatments for a given plate of samples#
+  ptib<-NULL
+  sampleids<-tibble()
+  for (rawfile in rawfilelist) {
+    secondary = strsplit(rawfile,"_")  #TODO: rename to condition?
+    secondaryname <- secondary[[1]][1]
+    fpath <-  paste (rawdir, rawfile, sep="/") 
+    filetext<-readLines(fpath) #using a raw read of lines due to ragged nature of file
+    datastart <-grep ("DataType:", filetext)  #find instances of DataType  
+    #this findes the median ( could go after other metrics as well)
+    rownum = datastart[2]-datastart[1] 
+    median<- (filetext[seq(datastart[1]+1,datastart[2]-2)])
+    ##write to a temporary file- 
+    #TODO: save temporary file as a raw format table in output if need
+    write_lines(median,"TeMp")
+    tib<-  read_csv ("TeMp", show_col_types=FALSE)
+    file.remove("TeMp")
+    
+    #process the individual plate tibble 
+    tib <- tib %>% 
+      select(-c("Total Events")) %>%
+      mutate( across(.cols =-c("Location","Sample","BSA") , ~ .x -tib$BSA )) %>%
+      rename_with(.fn = ~ paste0(secondaryname ,"_", .x) )  %>%
+      rename_with(.cols=1, ~"Location" ) %>%
+      rename_with(.cols=2, ~"Sample") %>%
+      add_column(Plate=plate, .before= 1)
+    ### TODO: could add renaming specific beads if errors ever occurred ???
+    #clean names and check to see if PlateID maps to SampleID
+    tib$lookup <-samplelist$SampleID[match ( tib$Sample,samplelist$PlateID) ]
+    tib <- tib %>%
+       mutate(Sample = case_when(
+              !is.na(lookup) ~ lookup, .default = Sample
+       ))   %>%
+       mutate(Sample = toupper(gsub('\\s+', '-', Sample))) %>%
+       mutate(Sample = case_match(
+         Sample, !!!namefixes, .default=Sample)
+       ) %>%
+       select (-c(lookup, Location)) %>%
+       filter(! Sample %in% deletesamples )
+    ### names are often redundant so count them within a given plate ####
+    occurence=c()
+    for (i in 1:length(tib$Sample) ) {
+      occurence[i]= length( which(tib$Sample[1:i] == tib$Sample[i]) )
+    }
+    tib<-tib %>% 
+      add_column(Inplatecount=occurence, .before= 2)  
+    write_tsv(tib, paste0(outputdir,"/",secondaryname,"_",plate,"clean.tsv"))
+
+    ## join across conditions/antidobides across a plate  (fulljoin)  
+    if ( is.null(ptib)) {
+      ptib <-tib
+    } else {
+      ptib<- full_join(ptib,tib,join_by(Plate==Plate,
+                          Sample==Sample, Inplatecount== Inplatecount))
+    }
+  }
+  print (ptib)
+  write_tsv(ptib, paste0(outputdir,"/",projectname,"_",plate,"_compiled.tsv"))
+
+  if (is.null(ftib)) {
+     ftib<-ptib   
+  } else {
+      ftib<- dplyr::bind_rows(ftib, ptib ) 
+  }
+  
+}
+write_tsv(ftib, paste0(outputdir,"/",projectname,"_"fullcompile.tsv"))
+
+```
+
+The end ...

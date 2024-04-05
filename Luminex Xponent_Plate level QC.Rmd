@@ -1,0 +1,129 @@
+---
+title: "Luminex Xponent: Plate- level Quality Control"
+author: "Sahal Thahir, Jeff Bailey"
+date: "2024-04-04"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+
+
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = TRUE
+)
+knitr::opts_knit$set()
+print ("working directory is: ")
+getwd()
+```
+## Aim
+This code aims to do a plate- level quality control analysis. It screens for the minimum bead count and displays the log10(MFI) plot of the standard dilutions and BSA.
+
+### R Markdown
+This is an R Markdown document, areas that between the ```{r}  ``` frames that are **open** require manual entries as described in the **bolded text** . When entries are completed, press the *knit* button at the top of the page.  
+
+```{=html}
+<!-- *Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. #When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this with `and`* /
+--->
+```
+```{=html}
+<!--
+DEVELOPER NOTES
+#useful links BSA corrected-- <https://docs.google.com/spreadsheets/d/1kFEW7UqGGvfmOtYQq_AdP3V2w7LwdhDLpTHPmPaJGnM/edit#gid=1434210263>
+
+#TODO: potential transplate normalization based on standards
+
+-->
+```
+
+```{r Load needed libraries}
+library(tidyverse)
+```
+
+### Confirm working directory
+This is the project folder where the data is found. If needed you can set the working directory using the *setwd()* function. 
+```{r} 
+getwd()
+```
+
+### Choose file
+Chose the raw plate file from working directory by pasting the **file path** (in the quotes). Ideally, this is placed in the "Project/data/raw/luminex/" folder as seen below.
+
+```{r Input file path, echo=TRUE, warning=TRUE}
+# Input file path
+input_file <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/raw/luminex/Ahero_IgG1_Test.csv"
+```
+
+# Quality Control
+## Bead count
+  Set the **minimum bead count** as *min_beadcount*. Note that the standard we have set here is 50. All bead counts <50 will termed "Low". A csv with the well- analyte bead counts will be exported in the "Project/data/qc" folder as *PlateName_beadqc_df.csv*
+ 
+```{r Bead QC output filepath, echo=TRUE, warning=FALSE}
+# Minimum bead count for analysis
+min_beadcount <- 50
+```
+
+```{r Bead count analysis, warning=FALSE}
+        lines <- readLines(input_file)
+    # Bead count >50
+       # create bead_qc dataframe   
+         # Find Bead count data 
+                #start row: 1 below "DataType: Count" row but not "Per Bead Count"
+                  start_row <- grep("DataType", lines) # Find rows with "DataType"
+                  start_row <- start_row[grepl("Count", lines[start_row])] # Filter rows with "Count"
+                  start_row <- start_row[!grepl("Per Bead", lines[start_row])]  # Filter out rows with "Per Bead"
+      
+                  start_row <- max(start_row) + 1 
+                  
+                #end row: 2 above "Avg Net MFI" row
+                  end_row <- grep("Avg Net MFI", lines) - 2
+              
+          # Extract beadqc_df
+              if (length(start_row) > 0 & length(end_row) > 0) {
+                beadqc_df <- read.csv(text = paste(lines[start_row:end_row], collapse = "\n"))
+              } else {
+                beadqc_df <- NULL
+              }
+          # Replace <50 bead as "Low"
+              for (col in names(beadqc_df)[sapply(beadqc_df, is.numeric)]) {
+                beadqc_df[[col]][beadqc_df[[col]] < min_beadcount] <- "Low"
+              }
+          # Export filepath + Plate name in csv
+                  output_file <- file.path(getwd(), "data", "qc", paste0(tools::file_path_sans_ext(basename(input_file)), "_beadqc.csv"))
+                  
+                  # Export the beadqc_df dataframe as a CSV file
+                  write.csv(beadqc_df, file = output_file, row.names = FALSE)
+                  
+                  # Print a message indicating the export was successful
+                  cat("The bead QC report has been exported to", output_file, "\n")
+```
+
+### List of wells/analytes <50 beads
+This code results in a list of wells, sample IDs, and analytes that are less than the minimum bead count set. This file is exported to "Project/data/qc" folder as *PlateName_beadqc_list.csv*.
+```{r Low bead count list}
+      # List of low wells
+                  # Filter the dataframe to get rows where value is "Low"
+                  beadqc_list <- beadqc_df %>%
+                    gather(Column, Value, -Location, -Sample) %>%
+                    filter(Value == "Low") %>%
+                    select(Location, Sample, Column)
+                  
+                  # If you want to reset rownames
+                  rownames(beadqc_list) <- NULL
+                  
+                  # Export filepath + Plate name in csv
+                  output_file_list <- file.path(getwd(), "data", "qc", 
+                    paste0(tools::file_path_sans_ext(basename(input_file)), "_beadqc_list.csv"))
+                  
+                  # Export the beadqc_list as a CSV file
+                  write.csv(beadqc_list, file = output_file_list, row.names = FALSE)
+                  
+                  # Print a message indicating the export was successful
+                  cat("The bead QC list has been exported to", output_file_list, "\n")
+                  beadqc_list
+```                   
+
+
