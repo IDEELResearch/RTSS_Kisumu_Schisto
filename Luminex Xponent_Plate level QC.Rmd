@@ -1,6 +1,6 @@
 ---
 title: "Luminex Xponent: Plate- level Quality Control"
-author: "Sahal Thahir"
+author: "Sahal Thahir & Jeff Bailey"
 date: "2024-04-04"
 output:
   pdf_document: default
@@ -314,7 +314,7 @@ For example: \*Standard 2\* will have a `Dilution_factor` of -2
 
 This code will run for all `analyte`
 
-```{r}
+```{r echo=FALSE, warning=FALSE}
 # No input required
     # Create a standards dataframe
     standards_df <- results_df %>%
