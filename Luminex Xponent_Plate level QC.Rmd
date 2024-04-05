@@ -1,29 +1,32 @@
 ---
 title: "Luminex Xponent: Plate- level Quality Control"
-author: "Sahal Thahir, Jeff Bailey"
+author: "Sahal Thahir"
 date: "2024-04-04"
 output:
   pdf_document: default
-  html_document: default
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
 
 
-knitr::opts_chunk$set(
-	echo = FALSE,
-	message = FALSE,
-	warning = TRUE
-)
+knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set()
-print ("working directory is: ")
-getwd()
 ```
+
 ## Aim
-This code aims to do a plate- level quality control analysis. It screens for the minimum bead count and displays the log10(MFI) plot of the standard dilutions and BSA.
+
+This code aims to do a plate- level quality control analysis for Luminex
+studies through bead counts, Background MFI, and Standard curve
+analysis.
 
 ### R Markdown
-This is an R Markdown document, areas that between the ```{r}  ``` frames that are **open** require manual entries as described in the **bolded text** . When entries are completed, press the *knit* button at the top of the page.  
+
+This is an R Markdown document, areas that between the `{r}` frames that
+are require manual entries as described in the **bolded text**. When
+entries are completed, press the *knit* button at the top of the page.
 
 ```{=html}
 <!-- *Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. #When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this with `and`* /
@@ -38,72 +41,133 @@ DEVELOPER NOTES
 
 -->
 ```
-
-```{r Load needed libraries}
-library(tidyverse)
+```{r Library loads, include=FALSE}
+# No input required
+            library(tidyverse)
+            library(here)
 ```
 
-### Confirm working directory
-This is the project folder where the data is found. If needed you can set the working directory using the *setwd()* function. 
-```{r} 
-getwd()
-```
+#### Dependencies
 
-### Choose file
-Chose the raw plate file from working directory by pasting the **file path** (in the quotes). Ideally, this is placed in the "Project/data/raw/luminex/" folder as seen below.
+-   `r R.version.string`
+    -   `tidyverse` (v. `r packageVersion("tidyverse")`)
+    -   `here` (v. `r packageVersion("here")`)
 
-```{r Input file path, echo=TRUE, warning=TRUE}
-# Input file path
-input_file <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/raw/luminex/Ahero_IgG1_Test.csv"
+## Required Inputs
+
+### 1. Confirm working directory:
+
+This is the project folder where the project is found. All folders and
+files added to the code will be within this folder. If needed you can
+set the working directory using the `setwd()` function.
+
+**Working directory**: `r getwd()`
+
+### 2. Choose file (input required):
+
+Chose the raw plate file from working directory by adding what folder
+within (in the quotes). In the example below, the plate csv is in the
+`Project/data/raw/luminex/` folder.
+
+### 3. Set minimum bead count:
+
+Set the **minimum bead count** as `min_beadcount`. In this example, the
+standard we have set here is `50`. All bead counts \<50 will be
+identified.
+
+### 4 Define the `file_path`:
+
+For example, here "Project/data/qc" folder is where the
+*PlateName_beadqc_df.csv will be saved*
+
+```{r Required Inputs, echo=TRUE, warning=TRUE}
+# Choose the input file
+input_file <- "data/raw/luminex/Ahero_IgG1_Test.csv"
+# Minimum bead count for analysis
+min_beadcount <- 50
+
+#Output file path
+file_path <- "data/qc"
 ```
 
 # Quality Control
-## Bead count
-  Set the **minimum bead count** as *min_beadcount*. Note that the standard we have set here is 50. All bead counts <50 will termed "Low". A csv with the well- analyte bead counts will be exported in the "Project/data/qc" folder as *PlateName_beadqc_df.csv*
- 
+
+## Bead count (Input required)
+
 ```{r Bead QC output filepath, echo=TRUE, warning=FALSE}
-# Minimum bead count for analysis
-min_beadcount <- 50
+
 ```
 
-```{r Bead count analysis, warning=FALSE}
-        lines <- readLines(input_file)
-    # Bead count >50
-       # create bead_qc dataframe   
-         # Find Bead count data 
-                #start row: 1 below "DataType: Count" row but not "Per Bead Count"
-                  start_row <- grep("DataType", lines) # Find rows with "DataType"
-                  start_row <- start_row[grepl("Count", lines[start_row])] # Filter rows with "Count"
-                  start_row <- start_row[!grepl("Per Bead", lines[start_row])]  # Filter out rows with "Per Bead"
-      
-                  start_row <- max(start_row) + 1 
-                  
-                #end row: 2 above "Avg Net MFI" row
-                  end_row <- grep("Avg Net MFI", lines) - 2
+```{r Bead count analysis, echo=FALSE, fig.height=17, fig.width=10, warning=FALSE}
+# No input required
+      lines <- readLines(input_file)
+      # Bead count >50
+        # create bead_qc dataframe   
+        # Find Bead count data 
+        #start row: 1 below "DataType: Count" row but not "Per Bead Count"
+        start_row <- grep("DataType", lines) # Find rows with "DataType"
+        start_row <- start_row[grepl("Count", lines[start_row])] # Filter rows with "Count"
+        start_row <- start_row[!grepl("Per Bead", lines[start_row])]  # Filter out rows with "Per Bead"
+        
+        start_row <- max(start_row) + 1 
+        
+        #end row: 2 above "Avg Net MFI" row
+        end_row <- grep("Avg Net MFI", lines) - 2
+        
+        # Extract beadqc_df
+        if (length(start_row) > 0 & length(end_row) > 0) {
+          beadqc_df <- read.csv(text = paste(lines[start_row:end_row], collapse = "\n"))
+          
+          # Trim beadqc_df to include only columns between "Location" and the column before "Total.Events"
+          location_index <- grep("Location", colnames(beadqc_df))
+          total_events_index <- grep("Total.Events", colnames(beadqc_df))
+          beadqc_df <- beadqc_df[, c(location_index, (location_index + 1):(total_events_index - 1))]
+        } else {
+          beadqc_df <- NULL
+        }
+        #Heatmap
+             # Convert the dataframe to long format
+               beadqc_long <- pivot_longer(beadqc_df, cols = -c(Location, Sample), names_to = "Numeric_Column", values_to = "Value")
+                
+              # Convert the "Value" column to numeric
+                beadqc_long$Value <- as.numeric(beadqc_long$Value)
+          
+            # Create the title
+              title <- paste("Quality Control: Bead Count",gsub(".csv", "", basename(input_file)))
               
-          # Extract beadqc_df
-              if (length(start_row) > 0 & length(end_row) > 0) {
-                beadqc_df <- read.csv(text = paste(lines[start_row:end_row], collapse = "\n"))
-              } else {
-                beadqc_df <- NULL
-              }
-          # Replace <50 bead as "Low"
+         
+           # Create the heatmap
+              plot <- ggplot(beadqc_long, aes(x = Numeric_Column, y = factor(Location, levels = rev(unique(beadqc_long$Location))), fill = Value)) +
+                geom_tile(color = "black") +
+                scale_fill_gradient(low = "red", high = "blue", limits = c(0, max(beadqc_long$Value)), breaks = seq(0, max(beadqc_long$Value), by = 50)) +
+                labs(x = "Antigen", y = "Location", title = title) +  # Set the title
+                theme_minimal()
+
+      # Export the plot to file_path
+      output_file <- file.path(file_path, paste0(tools::file_path_sans_ext(basename(input_file)), "_beadqc.png"))
+      ggsave(filename = output_file, plot = plot, width = 10, height = 6, dpi = 300)
+       # Print a message indicating the export was successful
+                  cat("The bead QC report has been exported to", output_file, "\n")
+                  
+      #Display plot
+              plot
+     
+```
+
+### List of wells/analytes \<50 beads
+
+This code results in a list of wells, sample IDs, and analytes that are
+less than the minimum bead count set. This file is exported to
+`file_path` (chosen above) as *PlateName_beadqc_list.csv*. Values in
+this list will be `Na` in the Median MFI dataframe. `file_path`:
+`r file_path` (this can be edited in the **Bead Count** section)
+
+```{r Low bead count list, echo=FALSE}
+# No input required
+     # Replace <50 bead as "Low"
               for (col in names(beadqc_df)[sapply(beadqc_df, is.numeric)]) {
                 beadqc_df[[col]][beadqc_df[[col]] < min_beadcount] <- "Low"
               }
-          # Export filepath + Plate name in csv
-                  output_file <- file.path(getwd(), "data", "qc", paste0(tools::file_path_sans_ext(basename(input_file)), "_beadqc.csv"))
-                  
-                  # Export the beadqc_df dataframe as a CSV file
-                  write.csv(beadqc_df, file = output_file, row.names = FALSE)
-                  
-                  # Print a message indicating the export was successful
-                  cat("The bead QC report has been exported to", output_file, "\n")
-```
-
-### List of wells/analytes <50 beads
-This code results in a list of wells, sample IDs, and analytes that are less than the minimum bead count set. This file is exported to "Project/data/qc" folder as *PlateName_beadqc_list.csv*.
-```{r Low bead count list}
       # List of low wells
                   # Filter the dataframe to get rows where value is "Low"
                   beadqc_list <- beadqc_df %>%
@@ -115,7 +179,7 @@ This code results in a list of wells, sample IDs, and analytes that are less tha
                   rownames(beadqc_list) <- NULL
                   
                   # Export filepath + Plate name in csv
-                  output_file_list <- file.path(getwd(), "data", "qc", 
+                  output_file_list <- file.path(file_path, 
                     paste0(tools::file_path_sans_ext(basename(input_file)), "_beadqc_list.csv"))
                   
                   # Export the beadqc_list as a CSV file
@@ -124,6 +188,160 @@ This code results in a list of wells, sample IDs, and analytes that are less tha
                   # Print a message indicating the export was successful
                   cat("The bead QC list has been exported to", output_file_list, "\n")
                   beadqc_list
-```                   
+```
 
+## QC of median MFI data
 
+This extracts the median MFI data, with all well-analyte combinations
+\<50 beads/well replaced with *NA*. It completes the BSA MFI subtraction
+as well
+
+*note: negative values are kept*
+
+```{r Median MFI w/ low bead count removal, warning=FALSE, include=FALSE}
+#No input required
+      # Median MFI ----
+            # results_df: File Extraction, initial triming, BSA subtraction for Median MFI data ---- 
+            # Median MFI dataframe: Below "Median" and two above "Net MFI"    
+                  # Find the row index containing the word "Median"
+                  median_row_index <- grep("Median", lines)
+                  
+                  # Find the row index containing the word "Net MFI"
+                  net_mfi_row_index <- grep("Net MFI", lines)
+                  
+                  # Find the row index of two rows above "Net MFI"
+                  net_mfi_row_index <- net_mfi_row_index - 2
+                  
+                  # Extract data between "Median" and two rows above "Net MFI"
+                  data_lines <- lines[(median_row_index + 1):net_mfi_row_index]
+              # Create a data frame
+                results_df <- read.csv(text = paste(data_lines, collapse = "\n"), na.strings = "")
+            
+            # Remove low bead values as NA, using beadqc_list
+                  for (i in 1:nrow(beadqc_list)) {
+                    # Extract information from beadqc_list
+                    location <- beadqc_list$Location[i]
+                    column <- beadqc_list$Column[i]
+                    sample <- beadqc_list$Sample[i]
+                    
+                    # Find the row index in results_df where Location and Sample match
+                    row_index <- which(results_df$Location == location & results_df$Sample == sample)
+                    
+                    # Remove value in specified column for the found row index
+                    results_df[row_index, column] <- NA
+                  }
+                  
+            # Creation of results_df: Filter out columns between "Location" and "Total.Events"
+            location_index <- grep("Location", colnames(results_df))
+            total_events_index <- grep("Total.Events", colnames(results_df))
+            columns_to_keep <- (location_index + 1):(total_events_index - 1)
+            
+            results_df <- results_df[, columns_to_keep]
+            
+        # BSA Subtraction
+           # Assuming BSA column index is known
+            bsa_index <- grep("BSA", colnames(results_df))
+            
+                  # Store the BSA column separately
+                  bsa_values <- results_df[, bsa_index]
+                  
+                  # Identify numerical columns excluding BSA
+                  nonBSA_numerical_columns <- sapply(results_df[, -bsa_index], is.numeric)
+            
+            # Subtract BSA from numerical columns
+            results_df[, nonBSA_numerical_columns] <- results_df[, nonBSA_numerical_columns] - bsa_values
+              
+                  # Reinsert the BSA column
+                  results_df[, bsa_index] <- bsa_values
+```
+
+### Background MFI
+
+This code averages the median MFI values for all background and
+non-background samples. This requires all Background samples to have
+"Background" within the characters in the `Sample` column
+
+```{r Background Median MFI plot, echo=FALSE}
+# No input required
+        # Analytes: Get the names of numerical columns
+          analytes <- names(results_df)[sapply(results_df, is.numeric)]
+        
+        # Filter rows with "Background" and without "Background" in Sample column
+            background_rows <- results_df %>%
+              filter(grepl("^Background", Sample, ignore.case = TRUE))
+            non_background_rows <- results_df %>%
+              filter(!grepl("^Background", Sample, ignore.case = TRUE))
+        
+        # Calculate averaged MFI
+            background_averages <- background_rows %>%
+              summarise(across(all_of(analytes), ~ mean(., na.rm = TRUE)))
+            non_background_averages <- non_background_rows %>%
+              summarise(across(all_of(analytes), ~ mean(., na.rm = TRUE)))
+        
+        # Combine average frames
+            background_averages <- background_averages %>%
+              pivot_longer(cols = everything(), names_to = "Column", values_to = "Average", names_prefix = "background_")
+            background_averages$Type <- "Background"
+            
+            non_background_averages <- non_background_averages %>%
+              pivot_longer(cols = everything(), names_to = "Column", values_to = "Average", names_prefix = "non_background_")
+            non_background_averages$Type <- "Non-Background"
+            
+            averages_combined <- rbind(background_averages, non_background_averages)
+        
+        # Bar graph
+          # Create Title
+          title <- paste("Background analysis for", gsub(".csv", "", basename(input_file)))
+          
+          # Create plot
+          ggplot(averages_combined, aes(x = Column, y = Average, fill = Type)) +
+            geom_bar(stat = "identity", position = "dodge") +
+            scale_fill_manual(values = c("darkslategrey", "cornflowerblue")) + # Set custom colors
+            labs(title = title,
+                 x = "Analyte", y = "Averaged Median MFI") +
+            theme_minimal()
+          
+```
+
+### Standard curve
+
+This code will attempt to create standard curves. This requires the
+samples have "Standard" within the characters in the `Sample` column.
+This will extraction `Dilution_Factor` as the number within the name (x
+-1).
+
+For example: \*Standard 2\* will have a `Dilution_factor` of -2
+
+This code will run for all `analyte`
+
+```{r}
+# No input required
+    # Create a standards dataframe
+    standards_df <- results_df %>%
+      filter(str_detect(Sample, "Standard")) %>%
+          # Extract dilution factor from the Sample column and make it negative
+          mutate(Dilution_Factor = as.factor(-as.numeric(str_extract(Sample, "\\d+")))) %>%
+          # Move Dilution_Factor column to the second position
+          select(Sample, Dilution_Factor, everything())
+    
+    # Create Plot
+        # plots_list
+        plots_list <- lapply(analytes, function(analyte) {
+          # Create Title
+            title <- paste(analyte, "standard curve for", gsub(".csv", "", basename(input_file)))
+          # Create plot for the current analyte
+          plot <- ggplot(standards_df, aes(x = Dilution_Factor, y = !!sym(analyte))) +
+            geom_point() +
+            labs(title = title,
+                 x = "Dilution Factor",
+                 y = "Logarithmic Intensity") +
+            scale_y_log10()  # Add log10 scale to y-axis
+          
+          return(plot)
+        })
+       
+        
+        # Display plots
+        plots_list
+
+```
