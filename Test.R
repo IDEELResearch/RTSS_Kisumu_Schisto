@@ -1,55 +1,73 @@
-# Do Not Edit
-lines <- readLines(input_file)
-# Bead count >50
-# create bead_qc dataframe   
-# Find Bead count data----
-#start row: 1 below "DataType: Count" row but not "Per Bead Count"
-start_row <- grep("DataType", lines) # Find rows with "DataType"
-start_row <- start_row[grepl("Count", lines[start_row])] # Filter rows with "Count"
-start_row <- start_row[!grepl("Per Bead", lines[start_row])]  # Filter out rows with "Per Bead"
-
-start_row <- max(start_row) + 1 
-
-#end row: 2 above "Avg Net MFI" row
-end_row <- grep("Avg Net MFI", lines) - 2
-
-# Extract beadqc_df
-if (length(start_row) > 0 & length(end_row) > 0) {
-  beadqc_df <- read.csv(text = paste(lines[start_row:end_row], collapse = "\n"))
-  
-  # Trim beadqc_df to include only columns between "Location" and "Total.Events"
-  total_events_index <- grep("Total.Events", colnames(beadqc_df))
-  beadqc_df <- beadqc_df[, -((total_events_index + 1):ncol(beadqc_df))]
-} else {
-  beadqc_df <- NULL
-}
+# Load the required libraries
+library(tidyverse)
 
 
-# Convert the dataframe to long format
-beadqc_long <- pivot_longer(beadqc_df, cols = -c(Location, Sample), names_to = "Numeric_Column", values_to = "Value")
+# Creation of standards dataframes ----
+    #standards_df: all standards data from all paltes
+        # Extract standards from all_plates_df
+          standards_df <- all_plates_df[grep("Standard", all_plates_df$Sample), ]
+        
+        # Create Dilution factor column
+          standards_df <- standards_df %>%
+            mutate(Dilution_Factor = -as.numeric(str_extract(Sample, "\\d+")))
+          
+            # Move Dilution_Factor column to the second position
+              standards_df <- standards_df %>%
+                select(Sample, Dilution_Factor, everything())  
+        
+        # Categorize MFI columns
+          standard_mfi_cols <- names(standards_df)[sapply(standards_df, is.numeric) & names(standards_df) != "Dilution_Factor"]
+        
+        # Extract the part of the column name after "_"
+          mfi_names <- gsub(".*_", "", standard_mfi_cols)
+        
+        # Gather MFI columns into long format
+          standard_mfi_df <- tidyr::gather(standards_df, key = "Ab_Ag", value = "MFI", all_of(standard_mfi_cols))
+        
+        # Create Antigen groups
+          standard_mfi_df <- standard_mfi_df %>%
+            mutate(Antigen = gsub(".*_", "", Ab_Ag))
+          
+        #Create Plate column
+            # Function to get Plate value for each row
+              get_plate_value <- function(row) {
+                non_empty_values <- na.omit(row)
+                if (length(non_empty_values) == 0) {
+                  return(NA_character_)
+                } else {
+                  return(non_empty_values[1])
+                }
+              }
+            # Identify columns containing "Plate_"
+              plate_cols <- grep("Plate_", names(standards_df), value = TRUE)
+            
+            # Create Plate column in standard_mfi_df
+              standard_mfi_df <- standard_mfi_df %>%
+                mutate(Plate = apply(standard_mfi_df[plate_cols], 1, get_plate_value))
 
-# Convert the "Value" column to numeric
-beadqc_long$Value <- as.numeric(beadqc_long$Value)
+        # Create Antigen groups
+        standard_mfi_df <- standard_mfi_df %>%
+          mutate(Antigen = gsub(".*_", "", Ab_Ag))
+        
+        
+# Generate plots ----
+        # All plates- scatterplot based on Antigen
+        ggplot(standard_mfi_df, aes(x = Dilution_Factor, y = MFI, color = Plate)) +
+          geom_point() +
+          labs(x = "Dilution Factor", y = "MFI Value", color = "Plate") +
+          ggtitle("MFI Standard curve based on Plates")
 
-# Create the heatmap
-ggplot(beadqc_long, aes(x = Numeric_Column, y = Location, fill = Value)) +
-  geom_tile(color = "black") +
-  scale_fill_gradient(low = "red", high = "blue") +  # Adjust color gradient as needed
-  labs(x = "Numeric Columns", y = "Location") +  # Add axis labels
-  theme_minimal()  # Customize plot theme if necessary
+        # Standard curves for each antigen
+        plots <- standard_mfi_df %>%
+          split(.$Antigen) %>%
+          map(~ggplot(.x, aes(x = Dilution_Factor, y = MFI, color = Plate)) +
+                geom_point() +
+                labs(x = "Dilution Factor", y = "MFI Value", color = "Plate") +
+                ggtitle(paste("MFI Standard curve for Antigen:", unique(.x$Antigen))))
+        
+            # Print the plots
+            plots
 
 
 
 
-# Replace <50 bead as "Low"----
-for (col in names(beadqc_df)[sapply(beadqc_df, is.numeric)]) {
-  beadqc_df[[col]][beadqc_df[[col]] < min_beadcount] <- "Low"
-}
-# Export filepath + Plate name in csv
-output_file <- file.path(file_path, paste0(tools::file_path_sans_ext(basename(input_file)), "_beadqc.csv"))
-
-# Export the beadqc_df dataframe as a CSV file
-write.csv(beadqc_df, file = output_file, row.names = FALSE)
-
-# Print a message indicating the export was successful
-cat("The bead QC report has been exported to", output_file, "\n")

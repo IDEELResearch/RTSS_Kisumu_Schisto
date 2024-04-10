@@ -1,0 +1,151 @@
+---
+title: "Luminex standardization across multiple plates"
+author: "Sahal Thahir & Jeff Bailey"
+date: "2024-04-04"
+output:
+  pdf_document: default
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+
+
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set()
+```
+
+## Aim
+
+This code aims to do create MFI scaling factors for individuals plates to standardize MFI values. Please run the first doc (I'll change this later so it's a link) prior to running this
+
+
+### R Markdown
+
+This is an R Markdown document, areas that between the `{r}` frames that
+are require manual entries as described in the **bolded text**. When
+entries are completed, press the *knit* button at the top of the page.
+
+```{=html}
+<!-- *Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. #When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this with `and`* /
+--->
+```
+```{=html}
+<!--
+DEVELOPER NOTES
+#useful links BSA corrected-- <https://docs.google.com/spreadsheets/d/1kFEW7UqGGvfmOtYQq_AdP3V2w7LwdhDLpTHPmPaJGnM/edit#gid=1434210263>
+
+#TODO: potential transplate normalization based on standards
+
+-->
+```
+```{r Library loads, include=FALSE}
+# No input required
+            library(tidyverse)
+            library(here)
+```
+
+#### Dependencies
+
+-   `r R.version.string`
+    -   `tidyverse` (v. `r packageVersion("tidyverse")`)
+    -   `here` (v. `r packageVersion("here")`)
+
+
+# Standard curves
+### Generation of standards dataframe 
+This code is extracting standards data from all plates. The list of `Plates` is listed bellow
+```{r Generate standard dataframes, echo=FALSE, warning=FALSE}
+# No input required
+    # Run previous "code" files sequentially
+       # List all R files in the "code" folder
+        code_files <- list.files("code", pattern = "*.R", full.names = TRUE)
+        
+        # Sort the files based on names (01, 02, 03, etc. )
+          code_files <- sort(code_files)
+        
+        # Source each R file sequentially
+        for (file in code_files) {
+          source(file)
+        }
+  # Creation of standards dataframes ----
+      #standards_df: all standards data from all paltes
+          # Extract standards from all_plates_df
+            standards_df <- all_plates_df[grep("Standard", all_plates_df$Sample), ]
+          
+          # Create Dilution factor column
+            standards_df <- standards_df %>%
+              mutate(Dilution_Factor = -as.numeric(str_extract(Sample, "\\d+")))
+            
+              # Move Dilution_Factor column to the second position
+                standards_df <- standards_df %>%
+                  select(Sample, Dilution_Factor, everything())  
+          
+          # Categorize MFI columns
+            standard_mfi_cols <- names(standards_df)[sapply(standards_df, is.numeric) & names(standards_df) != "Dilution_Factor"]
+          
+          # Extract the part of the column name after "_"
+            mfi_names <- gsub(".*_", "", standard_mfi_cols)
+          
+          # Gather MFI columns into long format
+            standard_mfi_df <- tidyr::gather(standards_df, key = "Ab_Ag", value = "MFI", all_of(standard_mfi_cols))
+          
+          # Create Antigen groups
+            standard_mfi_df <- standard_mfi_df %>%
+              mutate(Antigen = gsub(".*_", "", Ab_Ag))
+            
+          #Create Plate column
+              # Function to get Plate value for each row
+                get_plate_value <- function(row) {
+                  non_empty_values <- na.omit(row)
+                  if (length(non_empty_values) == 0) {
+                    return(NA_character_)
+                  } else {
+                    return(non_empty_values[1])
+                  }
+                }
+              # Identify columns containing "Plate_"
+                plate_cols <- grep("Plate_", names(standards_df), value = TRUE)
+              
+              # Create Plate column in standard_mfi_df
+                standard_mfi_df <- standard_mfi_df %>%
+                  mutate(Plate = apply(standard_mfi_df[plate_cols], 1, get_plate_value))
+  
+          # Create Antigen groups
+          standard_mfi_df <- standard_mfi_df %>%
+            mutate(Antigen = gsub(".*_", "", Ab_Ag))
+# show Plates 
+    print(unique(standard_mfi_df$Plate))
+    
+```
+
+# Standard plots
+### Plot 1
+This is a scatterplot of all standards across the plates listed above
+
+```{r echo=FALSE, warning=FALSE}
+# Generate plots ----
+    # All plates- scatterplot based on Antigen
+
+      ggplot(standard_mfi_df, aes(x = Dilution_Factor, y = MFI, color = Plate)) +
+        geom_point() +
+        labs(x = "Dilution Factor", y = "MFI Value", color = "Plate") +
+        ggtitle("MFI Standard curve based on Plates")
+```
+
+### Plot 2
+This is the standard curve for each antigen. 
+
+```{r Antigen standard curves, echo=FALSE, warning=FALSE}
+    # Standard curves for each antigen
+      plots <- standard_mfi_df %>%
+        split(.$Antigen) %>%
+        map(~ggplot(.x, aes(x = Dilution_Factor, y = MFI, color = Plate)) +
+              geom_point() +
+              labs(x = "Dilution Factor", y = "MFI Value", color = "Plate") +
+              ggtitle(paste("MFI Standard curve for Antigen:", unique(.x$Antigen))))
+      
+        # Print the plots
+          plots
+```

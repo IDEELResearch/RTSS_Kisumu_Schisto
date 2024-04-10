@@ -48,5 +48,9 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 
-# Ignore all CSV files
-*.csv
+# Ignored files (data and Rmd generated things)
+*.csv 
+*.pdf
+*.out
+*.html
+*.aux
