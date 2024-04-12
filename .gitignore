@@ -54,3 +54,4 @@ rsconnect/
 *.out
 *.html
 *.aux
+*.tsv
