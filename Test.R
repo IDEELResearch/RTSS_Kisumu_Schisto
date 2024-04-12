@@ -60,7 +60,7 @@ library(tidyverse)
         # Standard curves for each antigen
         plots <- standard_mfi_df %>%
           split(.$Antigen) %>%
-          map(~ggplot(.x, aes(x = Dilution_Factor, y = MFI, color = Plate)) +
+          map(~ggplot(.x, aes(x = Dilution_Factor, y = log10(MFI), color = Plate)) +
                 geom_point() +
                 labs(x = "Dilution Factor", y = "MFI Value", color = "Plate") +
                 ggtitle(paste("MFI Standard curve for Antigen:", unique(.x$Antigen))))
