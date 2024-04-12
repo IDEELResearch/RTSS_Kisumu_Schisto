@@ -131,9 +131,9 @@ This is a scatterplot of all standards across the plates listed above
 # Generate plots ----
     # All plates- scatterplot based on Antigen
 
-    ggplot(standard_mfi_df, aes(x = Dilution_Factor, y = log10(MFI), color = Subclass)) +
+    ggplot(standard_mfi_df, aes(x = Dilution_Factor, y = log10(MFI), color = Antigen)) +
   geom_point() +
-  labs(x = "Dilution Factor", y = "log10(MFI)", color = "Plate") +
+  labs(x = "Dilution Factor", y = "log10(MFI)", color = "Antigen") +
   ggtitle("MFI Standard curve based on Plates")
 
 ```

@@ -1,19 +1,28 @@
 ---
-title: "Lumix Compile EXperment (Plates and Conditions)"
+title: "Luminex Compilation"
+author: "Sahal Thahir & Jeff Bailey"
+date: "2024-04-12"
 output:
-  html_document: default
   pdf_document: default
-date: "2024-03-07"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
+
 
 ```{r setup, include=FALSE}
 
 
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_knit$set()
 print ("working directory is: ")
 getwd()
 ```
+# Aim
+
+This code allows a user to compile luminex xPONENT output for an overall experiment across multiple conditions and plates.
+
+
 
 ### R Markdown
 
@@ -32,34 +41,37 @@ DEVELOPER NOTES
 
 -->
 ```
-### Load needed libraries
+## Dependencies 
+### R Dependencies (*No input required*)
+-   `r R.version.string`
+    -   `tidyverse` (v. `r packageVersion("tidyverse")`)
+    -   `here` (v. `r packageVersion("here")`)
+    *use `install.packages("package name")` if not previously installed.*  
 
-```{r}
-library(tidyverse)
+```{r R Depedencies, include=FALSE}
+# No input required
+  library(tidyverse)
+  library(here)
 ```
-
-# Luminex Compile Experiment
-
-This code allows a user to compile luminex xPONENT output for an overall experiment across multiple conditions and plates.
-
-## Overview
-
-In general a PLATE should contain the same samples with multiple runs being determined based on the antibody Suggested plate nomenclature going forward would be:
-
-CONDITION_PLATE#\_YYYY-MM-DD-INITIALS.csv , e.g. IgG1_PLATE1_2024-03-07_JAB.csv
+### Data dependencies
+#### Plate names:
+This code extracts metadata based on the plate name. Plate file nomenclature should be include Plate condition (ex: IgG1, Ig3, FcR2a, etc.), Plate # (if same condition), date, and an experimenter as **CONDITION_PLATE#\_YYYY-MM-DD-INITIALS.csv**
+*e.g. IgG1_PLATE1_2024-03-07_JAB.csv, IgGTotal_PLATE1_23.10.25_AM*
 
 ## Set Input Parameters and Data
 
 This code chunk allows you to set input data
 
 ```{r}
-##set default variables ###
+## set default variables ###
 projectname ="BLTEST"
-rawdir = "EBL_RawData"  #<- the directory with the 'raw' exported xPONENT files appropriately named
+rawdir = "data/EBL_RawData"  #<- the directory with the 'raw' exported xPONENT files appropriately named
 platelist = c("PLATE1","PLATE2") #the plates to include in the analysis 
 #note conditions can be selected but you can simply limit them by moving files into another directory
 samplelistfile=c("SampleList_metadata.tsv")  #this is the mappoing of the PlateIDs (#s) --> SampleIDs
+```
 
+```{r Data cleaning, echo=FALSE}
 ### DATA CLEANING 
 #all names will be change to Upper Case and spaces will be changed to dashes (-)
 #you can then add to the below to map names to new names to fix inconsistencies in naming
@@ -99,7 +111,7 @@ deletesamples = c(
 
 The sample list must have PlateID -that can map to SampleID columns to allow for proper mapping. If you have no renaming to do (plates all contain SampleID already) then just use file with these columns but no rows.
 
-```{r}
+```{r Load samples, echo=FALSE}
 #load the sample list
 samplelist=read_tsv(samplelistfile, col_types="c")
 print (samplelist)
@@ -111,7 +123,7 @@ if ( !("PlateID" %in% names(samplelist) & "SampleID" %in% names(samplelist))  ) 
 
 ```
 
-```{r}
+```{r output, echo=FALSE}
 outputdir=paste0(projectname,"_compiled_output")
 if (!file.exists(outputdir) ) { dir.create(outputdir) }
 unlink( paste0( outputdir,"/*sv"))  #remove all csv and tsv files
@@ -127,7 +139,7 @@ This chunk does the main work. It will create the merged tsvs into the compiled 
 -   removes any sample ID rows not needed
 -   merges conditions across plates and then plates
 
-```{r}
+```{r echo=FALSE}
  #this code will extract plate data 
 ftib<-NULL
 #loop through the individual plates
@@ -200,7 +212,8 @@ for (plate in platelist) {
   }
   
 }
-write_tsv(ftib, paste0(outputdir,"/",projectname,"_"fullcompile.tsv"))
+write_tsv(ftib, paste0(outputdir, "/", projectname, "_", "fullcompile.tsv"))
+
 
 ```
 

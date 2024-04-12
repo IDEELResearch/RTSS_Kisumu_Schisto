@@ -1,0 +1,574 @@
+PlateID	SampleID	Site	Study group based and malaria exposure	Enrollment Date (DD/MM/YYYY)	DoB (DD/MM/YYYY)	Age	Sex	Malaria Exposure ( Y/N)	Post/Pre-Pandemic
+1	HC-001K	Ahero	Healthy control & holoendemic malaria	24/5/2022	14/3/2019	3.2	Male	Y	Post-Pandemic
+2	HC-002K	Ahero	Healthy control & holoendemic malaria	24/5/2022	28/12/2017	4.41	Male	Y	Post-Pandemic
+3	HC-003K	Ahero	Healthy control & holoendemic malaria	24/5/2022	13/3/2017	5.2	Female	Y	Post-Pandemic
+4	HC-004K	Ahero	Healthy control & holoendemic malaria	24/5/2022	23/3/2017	5.17	Male	Y	Post-Pandemic
+5	HC-005K	Ahero	Healthy control & holoendemic malaria	24/5/2022	3/12/2019	2.47	Male	Y	Post-Pandemic
+6	HC-006K	Ahero	Healthy control & holoendemic malaria	24/5/2022	21/5/2019	3.01	Female	Y	Post-Pandemic
+7	HC-007K	Ahero	Healthy control & holoendemic malaria	24/5/2022	28/2/2018	4.24	Female	Y	Post-Pandemic
+8	HC-008K	Ahero	Healthy control & holoendemic malaria	24/5/2022	30/3/2019	3.15	Male	Y	Post-Pandemic
+9	HC-009K	Ahero	Healthy control & holoendemic malaria	24/5/2022	21/7/2017	4.84	Female	Y	Post-Pandemic
+10	HC-010K	Ahero	Healthy control & holoendemic malaria	24/5/2022	15/5/2017	5.03	Female	Y	Post-Pandemic
+11	HC-011K	Ahero	Healthy control & holoendemic malaria	24/5/2022	24/8/2018	3.75	Female	Y	Post-Pandemic
+12	HC-012K	Ahero	Healthy control & holoendemic malaria	24/5/2022	27/5/2018	3.99	Male	Y	Post-Pandemic
+13	HC-013K	Ahero	Healthy control & holoendemic malaria	24/5/2022	21/2/2019	3.25	Female	Y	Post-Pandemic
+14	HC-014K	Ahero	Healthy control & holoendemic malaria	24/5/2022	6/6/2016	5.97	Female	Y	Post-Pandemic
+15	HC-015K	Ahero	Healthy control & holoendemic malaria	24/5/2022	26/6/2017	4.91	Male	Y	Post-Pandemic
+16	HC-016K	Ahero	Healthy control & holoendemic malaria	24/5/2022	15/12/2016	5.44	Female	Y	Post-Pandemic
+17	HC-017K	Ahero	Healthy control & holoendemic malaria	24/5/2022	15/9/2017	4.69	Male	Y	Post-Pandemic
+18	HC-018K	Ahero	Healthy control & holoendemic malaria	24/5/2022	8/9/2016	5.71	Female	Y	Post-Pandemic
+19	HC-019K	Ahero	Healthy control & holoendemic malaria	24/5/2022	12/7/2018	3.87	Female	Y	Post-Pandemic
+20	HC-020K	Ahero	Healthy control & holoendemic malaria	24/5/2022	22/5/2018	4.01	Male	Y	Post-Pandemic
+21	HC-021K	Ahero	Healthy control & holoendemic malaria	24/5/2022	1/4/2018	4.15	Male	Y	Post-Pandemic
+22	HC-022K	Ahero	Healthy control & holoendemic malaria	24/5/2022	12/5/2018	4.04	Male	Y	Post-Pandemic
+23	HC-023K	Ahero	Healthy control & holoendemic malaria	24/5/2022	8/1/2017	5.38	Female	Y	Post-Pandemic
+24	HC-024K	Ahero	Healthy control & holoendemic malaria	24/5/2022	23/11/2018	3.5	Female	Y	Post-Pandemic
+25	HC-025K	Ahero	Healthy control & holoendemic malaria	24/5/2022	18/11/2018	3.52	Female	Y	Post-Pandemic
+26	HC-026K	Ahero	Healthy control & holoendemic malaria	24/5/2022	4/3/2019	3.22	Male	Y	Post-Pandemic
+27	HC-027K	Ahero	Healthy control & holoendemic malaria	24/5/2022	7/10/2018	3.63	Female	Y	Post-Pandemic
+28	HC-028K	Ahero	Healthy control & holoendemic malaria	24/5/2022	21/8/2018	3.76	Male	Y	Post-Pandemic
+29	HC-029K	Ahero	Healthy control & holoendemic malaria	25/5/2022	10/10/2018	3.62	Female	Y	Post-Pandemic
+30	HC-030K	Ahero	Healthy control & holoendemic malaria	24/5/2022	13/2/2017	5.28	Female	Y	Post-Pandemic
+31	HC-031K	Ahero	Healthy control & holoendemic malaria	24/5/2022	2/9/2017	4.73	Female	Y	Post-Pandemic
+32	HC-032K	Ahero	Healthy control & holoendemic malaria	24/5/2022	12/4/2019	3.12	Female	Y	Post-Pandemic
+33	HC-033K	Ahero	Healthy control & holoendemic malaria	24/5/2022	15/4/2018	4.11	Female	Y	Post-Pandemic
+34	HC-035K	Ahero	Healthy control & holoendemic malaria	24/5/2022	8/1/2018	4.38	Male	Y	Post-Pandemic
+35	HC-036K	Ahero	Healthy control & holoendemic malaria	24/5/2022	13/8/2017	4.78	Male	Y	Post-Pandemic
+36	HC-037K	Ahero	Healthy control & holoendemic malaria	24/5/2022	19/9/2018	3.68	Male	Y	Post-Pandemic
+37	HC-038K	Ahero	Healthy control & holoendemic malaria	25/5/2022	9/3/2019	3.21	Female	Y	Post-Pandemic
+38	HC-039K	Ahero	Healthy control & holoendemic malaria	25/5/2022	19/3/2019	3.19	Male	Y	Post-Pandemic
+39	HC-040K	Ahero	Healthy control & holoendemic malaria	25/5/2022	27/4/2018	4.08	Female	Y	Post-Pandemic
+40	HC-041K	Ahero	Healthy control & holoendemic malaria	24/5/2022	6/6/2010	11.97	Female	Y	Post-Pandemic
+41	HC-042K	Ahero	Healthy control & holoendemic malaria	25/5/2022	19/1/2018	4.35	Male	Y	Post-Pandemic
+42	HC-043K	Ahero	Healthy control & holoendemic malaria	24/5/2022	29/3/2018	4.16	Male	Y	Post-Pandemic
+43	HC-045K	Ahero	Healthy control & holoendemic malaria	24/5/2022	20/6/2018	3.93	Female	Y	Post-Pandemic
+44	HC-047K	Ahero	Healthy control & holoendemic malaria	28/5/2022	4/6/2016	5.98	Male	Y	Post-Pandemic
+45	HC-048K	Ahero	Healthy control & holoendemic malaria	25/5/2022	11/10/2016	5.62	Female	Y	Post-Pandemic
+46	HC-049K	Ahero	Healthy control & holoendemic malaria	25/5/2022	23/7/2018	3.84	Male	Y	Post-Pandemic
+47	HC-050K	Ahero	Healthy control & holoendemic malaria	25/5/2022	28/5/2017	4.99	Male	Y	Post-Pandemic
+48	HC-051K	Ahero	Healthy control & holoendemic malaria	25/5/2022	17/7/2017	4.86	Male	Y	Post-Pandemic
+49	HC-052K	Ahero	Healthy control & holoendemic malaria	25/5/2022	19/10/2017	4.6	Female	Y	Post-Pandemic
+50	HC-053K	Ahero	Healthy control & holoendemic malaria	25/5/2022	15/11/2018	3.53	Female	Y	Post-Pandemic
+51	HC-054K	Ahero	Healthy control & holoendemic malaria	25/5/2022	27/11/2018	3.49	Male	Y	Post-Pandemic
+52	HC-055K	Ahero	Healthy control & holoendemic malaria	25/5/2022	21/3/2019	3.18	Male	Y	Post-Pandemic
+53	HC-056K	Ahero	Healthy control & holoendemic malaria	25/5/2022	6/5/2018	4.05	Female	Y	Post-Pandemic
+54	HC-057K	Ahero	Healthy control & holoendemic malaria	27/5/2022	27/8/2017	4.75	Male	Y	Post-Pandemic
+55	HC-058K	Ahero	Healthy control & holoendemic malaria	25/5/2022	7/8/2017	4.8	Male	Y	Post-Pandemic
+56	HC-059K	Ahero	Healthy control & holoendemic malaria	25/5/2022	6/1/2018	4.38	Male	Y	Post-Pandemic
+57	HC-060K	Ahero	Healthy control & holoendemic malaria	26/5/2022	4/11/2017	4.56	Female	Y	Post-Pandemic
+58	HC-061K	Ahero	Healthy control & holoendemic malaria	25/5/2022	24/10/2017	4.59	Female	Y	Post-Pandemic
+59	HC-062K	Ahero	Healthy control & holoendemic malaria	25/5/2022	20/5/2017	5.02	Female	Y	Post-Pandemic
+60	HC-063K	Ahero	Healthy control & holoendemic malaria	25/5/2022	21/1/2017	5.34	Female	Y	Post-Pandemic
+61	HC-064K	Ahero	Healthy control & holoendemic malaria	25/5/2022	11/1/2017	5.37	Female	Y	Post-Pandemic
+62	HC-065K	Ahero	Healthy control & holoendemic malaria	25/5/2022	31/3/2019	3.15	Female	Y	Post-Pandemic
+63	HC-066K	Ahero	Healthy control & holoendemic malaria	25/5/2022	16/5/2018	4.03	Female	Y	Post-Pandemic
+64	HC-067K	Ahero	Healthy control & holoendemic malaria	26/5/2022	9/5/2017	5.05	Female	Y	Post-Pandemic
+65	HC-068K	Ahero	Healthy control & holoendemic malaria	28/5/2022	21/11/2017	4.52	Female	Y	Post-Pandemic
+66	HC-069K	Ahero	Healthy control & holoendemic malaria	25/5/2022	7/11/2017	4.55	Male	Y	Post-Pandemic
+67	HC-070K	Ahero	Healthy control & holoendemic malaria	25/5/2022	5/8/2018	3.81	Female	Y	Post-Pandemic
+68	HC-071K	Ahero	Healthy control & holoendemic malaria	25/5/2022	10/8/2018	3.79	Female	Y	Post-Pandemic
+69	HC-072K	Ahero	Healthy control & holoendemic malaria	25/5/2022	16/3/2016	6.19	Male	Y	Post-Pandemic
+70	HC-073K	Ahero	Healthy control & holoendemic malaria	25/5/2022	12/8/2018	3.79	Male	Y	Post-Pandemic
+71	HC-074K	Ahero	Healthy control & holoendemic malaria	25/5/2022	12/11/2018	3.53	Female	Y	Post-Pandemic
+72	HC-075K	Ahero	Healthy control & holoendemic malaria	26/5/2022	23/9/2016	5.67	Female	Y	Post-Pandemic
+73	HC-076K	Ahero	Healthy control & holoendemic malaria	25/5/2022	17/5/2019	3.02	Male	Y	Post-Pandemic
+74	HC-077K	Ahero	Healthy control & holoendemic malaria	25/5/2022	27/4/2016	6.08	Female	Y	Post-Pandemic
+75	HC-078K	Ahero	Healthy control & holoendemic malaria	26/5/2022	16/6/2017	4.95	Female	Y	Post-Pandemic
+76	HC-079K	Ahero	Healthy control & holoendemic malaria	26/5/2022	23/11/2018	3.51	Female	Y	Post-Pandemic
+77	HC-080K	Ahero	Healthy control & holoendemic malaria	26/5/2022	12/7/2018	3.87	Female	Y	Post-Pandemic
+78	HC-081K	Ahero	Healthy control & holoendemic malaria	26/5/2022	24/6/2015	6.93	Female	Y	Post-Pandemic
+79	HC-082K	Ahero	Healthy control & holoendemic malaria	26/5/2022	20/1/2018	4.35	Female	Y	Post-Pandemic
+80	HC-083K	Ahero	Healthy control & holoendemic malaria	26/5/2022	11/5/2017	5.04	Male	Y	Post-Pandemic
+81	HC-084K	Ahero	Healthy control & holoendemic malaria	31/5/2022	7/7/2018	3.9	Male	Y	Post-Pandemic
+82	HC-085K	Ahero	Healthy control & holoendemic malaria	26/5/2022	31/7/2016	5.82	Female	Y	Post-Pandemic
+83	HC-086K	Ahero	Healthy control & holoendemic malaria	27/5/2022	7/1/2018	4.39	Male	Y	Post-Pandemic
+84	HC-087K	Ahero	Healthy control & holoendemic malaria	26/5/2022	9/12/2016	5.46	Male	Y	Post-Pandemic
+85	HC-088K	Ahero	Healthy control & holoendemic malaria	26/5/2022	7/12/2017	4.47	Female	Y	Post-Pandemic
+86	HC-089K	Ahero	Healthy control & holoendemic malaria	26/5/2022	9/9/2018	3.71	Male	Y	Post-Pandemic
+87	HC-090K	Ahero	Healthy control & holoendemic malaria	26/5/2022	26/9/2018	3.67	Female	Y	Post-Pandemic
+88	HC-091K	Ahero	Healthy control & holoendemic malaria	26/5/2022	31/7/2017	4.82	Male	Y	Post-Pandemic
+89	HC-092K	Ahero	Healthy control & holoendemic malaria	27/5/2022	20/6/2018	3.94	Male	Y	Post-Pandemic
+90	HC-093K	Ahero	Healthy control & holoendemic malaria	26/5/2022	13/9/2018	3.7	Male	Y	Post-Pandemic
+91	HC-094K	Ahero	Healthy control & holoendemic malaria	26/5/2022	28/7/2018	3.83	Female	Y	Post-Pandemic
+92	HC-095K	Ahero	Healthy control & holoendemic malaria	26/5/2022	10/2/2018	4.29	Male	Y	Post-Pandemic
+93	HC-096K	Ahero	Healthy control & holoendemic malaria	27/5/2022	4/11/2016	5.56	Female	Y	Post-Pandemic
+94	HC-097K	Ahero	Healthy control & holoendemic malaria	26/5/2022	29/5/2016	5.99	Male	Y	Post-Pandemic
+95	HC-098K	Ahero	Healthy control & holoendemic malaria	26/5/2022	2/5/2019	3.07	Female	Y	Post-Pandemic
+96	HC-099K	Ahero	Healthy control & holoendemic malaria	26/5/2022	4/12/2018	3.48	Male	Y	Post-Pandemic
+97	HC-100K	Ahero	Healthy control & holoendemic malaria	26/5/2022	23/4/2018	4.09	Male	Y	Post-Pandemic
+98	HC-101K	Ahero	Healthy control & holoendemic malaria	26/5/2022	12/8/2018	3.79	Female	Y	Post-Pandemic
+99	HC-102K	Ahero	Healthy control & holoendemic malaria	26/5/2022	10/4/2018	4.13	Female	Y	Post-Pandemic
+100	HC-103K	Ahero	Healthy control & holoendemic malaria	26/5/2022	6/2/2018	4.3	Female	Y	Post-Pandemic
+101	HC-104K	Ahero	Healthy control & holoendemic malaria	28/5/2022	24/3/2017	5.18	Female	Y	Post-Pandemic
+102	HC-105K	Ahero	Healthy control & holoendemic malaria	27/5/2022	5/4/2019	3.15	Female	Y	Post-Pandemic
+103	HC-106K	Ahero	Healthy control & holoendemic malaria	27/5/2022	14/1/2018	4.37	Male	Y	Post-Pandemic
+104	HC-107K	Ahero	Healthy control & holoendemic malaria	27/5/2022	23/11/2016	5.51	Female	Y	Post-Pandemic
+105	HC-108K	Ahero	Healthy control & holoendemic malaria	27/5/2022	25/5/2018	4.01	Male	Y	Post-Pandemic
+106	HC-109K	Ahero	Healthy control & holoendemic malaria	27/5/2022	30/6/2015	6.91	Female	Y	Post-Pandemic
+107	HC-110K	Ahero	Healthy control & holoendemic malaria	27/5/2022	24/8/2018	3.76	Male	Y	Post-Pandemic
+108	HC-111K	Ahero	Healthy control & holoendemic malaria	27/5/2022	15/10/2018	3.62	Female	Y	Post-Pandemic
+109	HC-112K	Ahero	Healthy control & holoendemic malaria	27/5/2022	16/5/2018	4.03	Female	Y	Post-Pandemic
+110	HC-113K	Ahero	Healthy control & holoendemic malaria	27/5/2022	9/1/2018	4.38	Female	Y	Post-Pandemic
+111	HC-114K	Ahero	Healthy control & holoendemic malaria	27/5/2022	30/5/2019	2.99	Female	Y	Post-Pandemic
+112	HC-115K	Ahero	Healthy control & holoendemic malaria	27/5/2022	8/9/2018	3.72	Female	Y	Post-Pandemic
+113	HC-116K	Ahero	Healthy control & holoendemic malaria	27/5/2022	25/12/2018	3.42	Female	Y	Post-Pandemic
+114	HC-117K	Ahero	Healthy control & holoendemic malaria	27/5/2022	9/4/2017	5.13	Male	Y	Post-Pandemic
+115	HC-118K	Ahero	Healthy control & holoendemic malaria	27/5/2022	20/11/2018	3.52	Female	Y	Post-Pandemic
+116	HC-119K	Ahero	Healthy control & holoendemic malaria	27/5/2022	24/10/2018	3.59	Female	Y	Post-Pandemic
+117	HC-120K	Ahero	Healthy control & holoendemic malaria	31/5/2022	14/6/2016	5.96	Female	Y	Post-Pandemic
+118	HC-121K	Ahero	Healthy control & holoendemic malaria	27/5/2022	24/3/2018	4.18	Male	Y	Post-Pandemic
+119	HC-122K	Ahero	Healthy control & holoendemic malaria	27/5/2022	19/6/2017	4.94	Female	Y	Post-Pandemic
+120	HC-123K	Ahero	Healthy control & holoendemic malaria	27/5/2022	10/7/2018	3.88	Male	Y	Post-Pandemic
+121	HC-124K	Ahero	Healthy control & holoendemic malaria	27/5/2022	3/2/2018	4.31	Female	Y	Post-Pandemic
+122	HC-125K	Ahero	Healthy control & holoendemic malaria	27/5/2022	27/6/2016	5.92	Female	Y	Post-Pandemic
+123	HC-126K	Ahero	Healthy control & holoendemic malaria	31/5/2022	21/6/2018	3.95	Female	Y	Post-Pandemic
+124	HC-127K	Ahero	Healthy control & holoendemic malaria	27/5/2022	25/9/2017	4.67	Male	Y	Post-Pandemic
+125	HC-129K	Ahero	Healthy control & holoendemic malaria	27/5/2022	1/5/2019	3.07	Female	Y	Post-Pandemic
+126	HC-130K	Ahero	Healthy control & holoendemic malaria	27/5/2022	14/11/2018	3.53	Male	Y	Post-Pandemic
+127	HC-131K	Ahero	Healthy control & holoendemic malaria	27/5/2022	17/7/2018	3.86	Male	Y	Post-Pandemic
+128	HC-132K	Ahero	Healthy control & holoendemic malaria	27/5/2022	7/10/2017	4.64	Male	Y	Post-Pandemic
+129	HC-133K	Ahero	Healthy control & holoendemic malaria	27/5/2022	13/9/2016	5.7	Male	Y	Post-Pandemic
+130	HC-134K	Ahero	Healthy control & holoendemic malaria	27/5/2022	9/10/2017	4.63	Male	Y	Post-Pandemic
+131	HC-135K	Ahero	Healthy control & holoendemic malaria	26/5/2022	1/10/2018	3.65	Female	Y	Post-Pandemic
+132	HC-136K	Ahero	Healthy control & holoendemic malaria	27/5/2022	2/7/2018	3.9	Male	Y	Post-Pandemic
+133	HC-137K	Ahero	Healthy control & holoendemic malaria	27/5/2022	18/9/2017	4.69	Male	Y	Post-Pandemic
+134	HC-138K	Ahero	Healthy control & holoendemic malaria	27/5/2022	21/2/2016	6.27	Female	Y	Post-Pandemic
+135	HC-139K	Ahero	Healthy control & holoendemic malaria	27/5/2022	31/12/2017	4.41	Male	Y	Post-Pandemic
+136	HC-140K	Ahero	Healthy control & holoendemic malaria	27/5/2022	22/2/2018	4.26	Female	Y	Post-Pandemic
+137	HC-141K	Ahero	Healthy control & holoendemic malaria	27/5/2022	11/10/2018	3.63	Female	Y	Post-Pandemic
+138	HC-142K	Ahero	Healthy control & holoendemic malaria	27/5/2022	24/2/2019	3.25	Female	Y	Post-Pandemic
+139	HC-143K	Ahero	Healthy control & holoendemic malaria	27/5/2022	10/1/2019	3.38	Male	Y	Post-Pandemic
+140	HC-144K	Ahero	Healthy control & holoendemic malaria	27/5/2022	21/12/2017	4.43	Female	Y	Post-Pandemic
+141	HC-145K	Ahero	Healthy control & holoendemic malaria	28/5/2022	8/10/2017	4.64	Male	Y	Post-Pandemic
+142	HC-146K	Ahero	Healthy control & holoendemic malaria	28/5/2022	2/9/2018	3.74	Male	Y	Post-Pandemic
+143	HC-147K	Ahero	Healthy control & holoendemic malaria	28/5/2022	4/6/2016	5.98	Male	Y	Post-Pandemic
+144	HC-148K	Ahero	Healthy control & holoendemic malaria	28/5/2022	23/4/2019	3.1	Female	Y	Post-Pandemic
+145	HC-149K	Ahero	Healthy control & holoendemic malaria	25/5/2022	17/3/2019	3.19	Male	Y	Post-Pandemic
+146	HC-150K	Ahero	Healthy control & holoendemic malaria	28/5/2022	20/12/2017	4.44	Female	Y	Post-Pandemic
+147	HC-151K	Ahero	Healthy control & holoendemic malaria	28/5/2022	13/9/2015	6.71	Male	Y	Post-Pandemic
+148	HC-152K	Ahero	Healthy control & holoendemic malaria	31/5/2022	6/6/2018	3.99	Female	Y	Post-Pandemic
+149	HC-153K	Ahero	Healthy control & holoendemic malaria	28/5/2022	18/5/2017	5.03	Male	Y	Post-Pandemic
+150	HC-154K	Ahero	Healthy control & holoendemic malaria	31/5/2022	4/10/2017	4.66	Male	Y	Post-Pandemic
+151	HC-155K	Ahero	Healthy control & holoendemic malaria	28/5/2022	13/11/2016	5.54	Female	Y	Post-Pandemic
+152	HC-156K	Ahero	Healthy control & holoendemic malaria	28/5/2022	14/4/2019	3.12	Male	Y	Post-Pandemic
+153	HC-157K	Ahero	Healthy control & holoendemic malaria	28/5/2022	12/3/2019	3.21	Female	Y	Post-Pandemic
+154	HC-159K	Ahero	Healthy control & holoendemic malaria	28/5/2022	22/5/2017	5.02	Female	Y	Post-Pandemic
+155	HC-160K	Ahero	Healthy control & holoendemic malaria	28/5/2022	7/10/2015	6.64	Male	Y	Post-Pandemic
+156	HC-161K	Ahero	Healthy control & holoendemic malaria	28/5/2022	17/12/2017	4.45	Female	Y	Post-Pandemic
+157	HC-162K	Ahero	Healthy control & holoendemic malaria	28/5/2022	28/9/2018	3.67	Male	Y	Post-Pandemic
+158	HC-163K	Ahero	Healthy control & holoendemic malaria	28/5/2022	16/8/2018	3.78	Male	Y	Post-Pandemic
+159	HC-164K	Ahero	Healthy control & holoendemic malaria	28/5/2022	30/4/2016	6.08	Male	Y	Post-Pandemic
+160	HC-165K	Ahero	Healthy control & holoendemic malaria	31/5/2022	18/2/2017	5.28	Male	Y	Post-Pandemic
+161	HC-166K	Ahero	Healthy control & holoendemic malaria	28/5/2022	21/11/2018	3.52	Male	Y	Post-Pandemic
+162	HC-167K	Ahero	Healthy control & holoendemic malaria	28/5/2022	19/4/2018	4.11	Female	Y	Post-Pandemic
+163	HC-168K	Ahero	Healthy control & holoendemic malaria	28/5/2022	21/11/2017	4.52	Female	Y	Post-Pandemic
+164	HC-169K	Ahero	Healthy control & holoendemic malaria	28/5/2022	7/4/2019	3.14	Female	Y	Post-Pandemic
+165	HC-170K	Ahero	Healthy control & holoendemic malaria	28/5/2022	4/5/2018	4.07	Female	Y	Post-Pandemic
+166	HC-171K	Ahero	Healthy control & holoendemic malaria	28/5/2022	25/5/2017	5.01	Female	Y	Post-Pandemic
+167	HC-172K	Ahero	Healthy control & holoendemic malaria	28/5/2022	6/9/2016	5.73	Female	Y	Post-Pandemic
+168	HC-173K	Ahero	Healthy control & holoendemic malaria	28/5/2022	23/3/2017	5.18	Female	Y	Post-Pandemic
+169	HC-174K	Ahero	Healthy control & holoendemic malaria	28/5/2022	28/6/2017	4.92	Male	Y	Post-Pandemic
+170	HC-176K	Ahero	Healthy control & holoendemic malaria	28/5/2022	17/7/2017	4.87	Male	Y	Post-Pandemic
+171	HC-177K	Ahero	Healthy control & holoendemic malaria	31/5/2022	26/9/2017	4.68	Male	Y	Post-Pandemic
+172	HC-178K	Ahero	Healthy control & holoendemic malaria	31/5/2022	1/2/2018	4.33	Male	Y	Post-Pandemic
+173	HC-179K	Ahero	Healthy control & holoendemic malaria	31/5/2022	30/9/2017	4.67	Male	Y	Post-Pandemic
+174	HC-180K	Ahero	Healthy control & holoendemic malaria	31/5/2022	28/5/2017	5.01	Female	Y	Post-Pandemic
+175	HC-181K	Ahero	Healthy control & holoendemic malaria	31/5/2022	3/10/2016	5.66	Male	Y	Post-Pandemic
+176	HC-182K	Ahero	Healthy control & holoendemic malaria	31/5/2022	3/5/2019	3.08	Male	Y	Post-Pandemic
+177	HC-183K	Ahero	Healthy control & holoendemic malaria	31/5/2022	3/5/2019	3.08	Male	Y	Post-Pandemic
+178	HC-184K	Ahero	Healthy control & holoendemic malaria	31/5/2022	27/8/2018	3.76	Male	Y	Post-Pandemic
+179	HC-185K	Ahero	Healthy control & holoendemic malaria	31/5/2022	28/3/2019	3.18	Male	Y	Post-Pandemic
+180	HC-186K	Ahero	Healthy control & holoendemic malaria	31/5/2022	12/6/2016	5.97	Female	Y	Post-Pandemic
+181	HC-187K	Ahero	Healthy control & holoendemic malaria	31/5/2022	12/8/2018	3.8	Male	Y	Post-Pandemic
+182	HC-188K	Ahero	Healthy control & holoendemic malaria	31/5/2022	3/12/2016	5.49	Female	Y	Post-Pandemic
+183	HC-189K	Ahero	Healthy control & holoendemic malaria	31/5/2022	26/11/2017	4.51	Male	Y	Post-Pandemic
+184	HC-190K	Ahero	Healthy control & holoendemic malaria	31/5/2022	8/11/2016	5.56	Male	Y	Post-Pandemic
+185	HC-191K	Ahero	Healthy control & holoendemic malaria	31/5/2022	3/3/2017	5.25	Female	Y	Post-Pandemic
+186	HC-192K	Ahero	Healthy control & holoendemic malaria	31/5/2022	8/3/2017	5.23	Male	Y	Post-Pandemic
+187	HC-193K	Ahero	Healthy control & holoendemic malaria	31/5/2022	24/8/2018	3.77	Male	Y	Post-Pandemic
+188	HC-194K	Ahero	Healthy control & holoendemic malaria	31/5/2022	27/2/2019	3.26	Female	Y	Post-Pandemic
+189	HC-195K	Ahero	Healthy control & holoendemic malaria	31/5/2022	4/11/2017	4.57	Female	Y	Post-Pandemic
+190	HC-196K	Ahero	Healthy control & holoendemic malaria	31/5/2022	3/3/2019	3.25	Female	Y	Post-Pandemic
+191	HC-197K	Ahero	Healthy control & holoendemic malaria	31/5/2022	10/5/2018	4.06	Female	Y	Post-Pandemic
+192	HC-198K	Ahero	Healthy control & holoendemic malaria	31/5/2022	24/12/2016	5.44	Female	Y	Post-Pandemic
+193	HC-200K	Ahero	Healthy control & holoendemic malaria	31/5/2022	17/11/2016	5.54	Female	Y	Post-Pandemic
+194	HC19-KC005	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	13/4/2013	6.47	Male	Y	Pre-Pandemic
+195	HC19-KC006	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	24/3/2007	12.53	Male	Y	Pre-Pandemic
+196	HC19-KC007	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	26/7/2007	12.19	Male	Y	Pre-Pandemic
+197	HC19-KC008	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	3/10/2017	1.99	Male	Y	Pre-Pandemic
+198	HC19-KC012	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	31/8/2016	3.08	Female	Y	Pre-Pandemic
+199	HC19-KC015	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	15/6/2007	12.3	Female	Y	Pre-Pandemic
+200	HC19-KC016	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	15/6/2007	12.3	Female	Y	Pre-Pandemic
+201	HC19-KC017	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	15/6/2005	14.3	Male	Y	Pre-Pandemic
+203	HC19-KC019	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	15/6/2010	9.3	Male	Y	Pre-Pandemic
+204	HC19-KC021	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	15/6/2007	12.3	Female	Y	Pre-Pandemic
+205	HC19-KC022	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	15/6/2004	15.3	Male	Y	Pre-Pandemic
+206	HC19-KC024	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	15/6/2017	2.29	Female	Y	Pre-Pandemic
+207	HC19-KC025	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	1/6/2007	12.34	Male	Y	Pre-Pandemic
+208	HC19-KC026	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	26/9/2006	13.02	Female	Y	Pre-Pandemic
+209	HC19-KC027	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	2/3/2009	10.59	Female	Y	Pre-Pandemic
+210	HC19-KC028	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	25/12/2004	14.77	Male	Y	Pre-Pandemic
+211	HC19-KC029	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	10/8/2008	11.15	Female	Y	Pre-Pandemic
+212	HC19-KC030	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	17/10/2015	3.96	Male	Y	Pre-Pandemic
+213	HC19-KC033	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	30/10/2017	1.92	Male	Y	Pre-Pandemic
+214	HC19-KC035	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	15/6/2012	7.3	Male	Y	Pre-Pandemic
+215	HC19-KC036	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	18/5/2011	8.38	Female	Y	Pre-Pandemic
+216	HC19-KC038	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	4/4/2008	11.5	Male	Y	Pre-Pandemic
+217	HC19-KC039	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	17/9/2012	7.04	Male	Y	Pre-Pandemic
+218	HC19-KC040	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	17/5/2014	5.38	Male	Y	Pre-Pandemic
+219	HC19-KC041	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	30/9/2019	10/8/2008	11.15	Female	Y	Pre-Pandemic
+220	HC19-KC047	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	19/9/2014	5.04	Female	Y	Pre-Pandemic
+221	HC19-KC048	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	27/5/2012	7.35	Male	Y	Pre-Pandemic
+222	HC19-KC049	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	7/12/2012	6.82	Male	Y	Pre-Pandemic
+223	HC19-KC050	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	6/2/2013	6.65	Male	Y	Pre-Pandemic
+224	HC19-KC051	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	6/7/2014	5.24	Male	Y	Pre-Pandemic
+225	HC19-KC057	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	17/10/2010	8.96	Male	Y	Pre-Pandemic
+226	HC19-KC058	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	19/4/2000	19.46	Male	Y	Pre-Pandemic
+227	HC19-KC059	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	13/12/2012	6.8	Female	Y	Pre-Pandemic
+228	HC19-KC060	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	7/6/2002	17.33	Male	Y	Pre-Pandemic
+229	HC19-KC063	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	1/6/2012	7.34	Male	Y	Pre-Pandemic
+230	HC19-KC064	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	1/6/2013	6.34	Male	Y	Pre-Pandemic
+231	HC19-KC065	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	14/10/2010	8.97	Female	Y	Pre-Pandemic
+232	HC19-KC066	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	25/1/2012	7.69	Male	Y	Pre-Pandemic
+233	HC19-KC067	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	28/5/2014	5.35	Male	Y	Pre-Pandemic
+234	HC19-KC068	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	3/8/2012	7.16	Female	Y	Pre-Pandemic
+235	HC19-KC069	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	21/1/2014	5.7	Male	Y	Pre-Pandemic
+236	HC19-KC070	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	3/11/2013	5.91	Male	Y	Pre-Pandemic
+237	HC19-KC071	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	4/8/2010	9.16	Male	Y	Pre-Pandemic
+238	HC19-KC072	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	8/11/2012	6.9	Male	Y	Pre-Pandemic
+239	HC19-KC073	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	4/9/2011	8.08	Male	Y	Pre-Pandemic
+240	HC19-KC074	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	1/10/2019	7/9/2011	8.07	Male	Y	Pre-Pandemic
+241	HC19-KC075	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	26/3/2014	5.52	Female	Y	Pre-Pandemic
+242	HC19-KC076	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	25/11/2010	8.86	Male	Y	Pre-Pandemic
+243	HC19-KC077	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	5/10/2010	9	Male	Y	Pre-Pandemic
+244	HC19-KC078	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	1/6/2014	5.34	Male	Y	Pre-Pandemic
+245	HC19-KC081	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	1/6/2010	9.34	Male	Y	Pre-Pandemic
+246	HC19-KC082	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	28/10/2010	8.93	Female	Y	Pre-Pandemic
+247	HC19-KC083	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	24/5/2011	8.36	Male	Y	Pre-Pandemic
+248	HC19-KC084	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	4/3/2012	7.58	Female	Y	Pre-Pandemic
+249	HC19-KC086	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	8/3/2014	5.57	Male	Y	Pre-Pandemic
+250	HC19-KC087	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	3/2/2010	9.67	Male	Y	Pre-Pandemic
+251	HC19-KC088	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	16/2/2012	7.63	Female	Y	Pre-Pandemic
+252	HC19-KC089	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	15/10/2009	9.97	Male	Y	Pre-Pandemic
+253	HC19-KC090	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	27/3/2015	4.52	Female	Y	Pre-Pandemic
+254	HC19-KC091	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	13/12/2012	6.81	Male	Y	Pre-Pandemic
+255	HC19-KC092	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	10/9/2014	5.06	Male	Y	Pre-Pandemic
+256	HC19-KC093	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	20/1/2014	5.7	Female	Y	Pre-Pandemic
+257	HC19-KC094	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	3/2/2010	9.67	Male	Y	Pre-Pandemic
+258	HC19-KC095	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	1/6/2012	7.34	Female	Y	Pre-Pandemic
+259	HC19-KC096	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	21/10/2013	5.95	Female	Y	Pre-Pandemic
+260	HC19-KC097	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	14/6/2014	5.3	Male	Y	Pre-Pandemic
+261	HC19-KC098	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	25/10/2009	9.94	Male	Y	Pre-Pandemic
+262	HC19-KC099	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	1/2/2011	8.67	Male	Y	Pre-Pandemic
+263	HC19-KC100	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	2/10/2019	25/5/2011	8.36	Male	Y	Pre-Pandemic
+264	HC19-KC101	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	1/10/2012	7.01	Male	Y	Pre-Pandemic
+265	HC19-KC102	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	29/11/2009	9.85	Male	Y	Pre-Pandemic
+266	HC19-KC103	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	9/6/2011	8.32	Female	Y	Pre-Pandemic
+267	HC19-KC104	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	29/5/2010	9.35	Female	Y	Pre-Pandemic
+268	HC19-KC105	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	1/11/2014	4.92	Male	Y	Pre-Pandemic
+269	HC19-KC106	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	1/6/2012	7.34	Female	Y	Pre-Pandemic
+270	HC19-KC107	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	23/6/2014	5.28	Male	Y	Pre-Pandemic
+271	HC19-KC108	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	12/4/2011	8.48	Male	Y	Pre-Pandemic
+272	HC19-KC109	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	26/2/2010	9.61	Female	Y	Pre-Pandemic
+273	HC19-KC110	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	20/12/2013	5.79	Female	Y	Pre-Pandemic
+274	HC19-KC111	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	23/2/2010	9.61	Female	Y	Pre-Pandemic
+275	HC19-KC112	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	24/4/2012	7.45	Female	Y	Pre-Pandemic
+276	HC19-KC113	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	3/4/2012	7.5	Male	Y	Pre-Pandemic
+277	HC19-KC114	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	3/1/2012	7.75	Male	Y	Pre-Pandemic
+278	HC19-KC115	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	2/10/2009	10.01	Male	Y	Pre-Pandemic
+279	HC19-KC116	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	15/1/2014	5.72	Male	Y	Pre-Pandemic
+280	HC19-KC117	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	28/5/2013	6.35	Female	Y	Pre-Pandemic
+281	HC19-KC118	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	1/1/2013	6.76	Female	Y	Pre-Pandemic
+282	HC19-KC119	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	2/9/2012	7.09	Female	Y	Pre-Pandemic
+283	HC19-KC120	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	18/3/2013	6.55	Male	Y	Pre-Pandemic
+284	HC19-KC121	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	9/9/2012	7.07	Male	Y	Pre-Pandemic
+285	HC19-KC122	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	5/6/2014	5.33	Male	Y	Pre-Pandemic
+286	HC19-KC123	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	3/10/2019	3/3/2013	6.59	Female	Y	Pre-Pandemic
+287	HC19-KC124	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	1/6/2013	6.35	Male	Y	Pre-Pandemic
+288	HC19-KC125	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	3/5/2013	6.42	Male	Y	Pre-Pandemic
+289	HC19-KC126	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	29/5/2013	6.35	Male	Y	Pre-Pandemic
+290	HC19-KC127	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	1/1/2013	6.76	Female	Y	Pre-Pandemic
+291	HC19-KC128	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	28/1/2013	6.68	Male	Y	Pre-Pandemic
+292	HC19-KC129	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	1/7/2014	5.26	Female	Y	Pre-Pandemic
+293	HC19-KC130	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	6/10/2012	7	Male	Y	Pre-Pandemic
+294	HC19-KC131	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	17/8/2011	8.14	Male	Y	Pre-Pandemic
+295	HC19-KC132	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	7/12/2014	4.83	Male	Y	Pre-Pandemic
+296	HC19-KC133	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	3/12/2009	9.84	Male	Y	Pre-Pandemic
+297	HC19-KC134	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	8/3/2011	8.58	Female	Y	Pre-Pandemic
+298	HC19-KC135	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	16/8/2012	7.14	Male	Y	Pre-Pandemic
+299	HC19-KC136	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	12/11/2009	9.9	Female	Y	Pre-Pandemic
+300	HC19-KC137	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	2/4/2010	9.51	Female	Y	Pre-Pandemic
+301	HC19-KC138	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	14/3/2013	6.56	Male	Y	Pre-Pandemic
+302	HC19-KC139	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	1/12/2010	8.85	Male	Y	Pre-Pandemic
+303	HC19-KC140	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	4/10/2019	12/12/2012	6.81	Male	Y	Pre-Pandemic
+304	HC19-KC141	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	16/10/2019	2/1/2013	6.79	Male	Y	Pre-Pandemic
+305	HC19-KC142	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	16/10/2019	27/11/2010	8.89	Male	Y	Pre-Pandemic
+306	HC19-KC143	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	16/10/2019	1/1/2014	5.79	Male	Y	Pre-Pandemic
+307	HC19-KC144	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	16/10/2019	23/9/2011	8.07	Female	Y	Pre-Pandemic
+308	HC19-KC145	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	16/10/2019	27/8/2012	7.14	Female	Y	Pre-Pandemic
+309	HC19-KC146	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	16/10/2019	1/10/2012	7.04	Female	Y	Pre-Pandemic
+310	HC19-KC147	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	16/10/2019	12/9/2010	9.1	Male	Y	Pre-Pandemic
+311	HC19-KC148	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	16/10/2019	21/3/2013	6.58	Male	Y	Pre-Pandemic
+312	HC19-KC149	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	16/10/2019	14/6/2014	5.34	Female	Y	Pre-Pandemic
+313	HC19-KC150	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	16/10/2019	10/10/2014	5.02	Female	Y	Pre-Pandemic
+314	HC19-KC151	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	16/10/2019	15/4/2011	8.51	Male	Y	Pre-Pandemic
+315	HC19-KC152	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	16/10/2019	14/10/2012	7.01	Male	Y	Pre-Pandemic
+316	HC19-KC153	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	16/10/2019	14/10/2012	7.01	Male	Y	Pre-Pandemic
+317	HC19-KC154	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	17/10/2019	24/12/2009	9.82	Male	Y	Pre-Pandemic
+318	HC19-KC155	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	17/10/2019	14/11/2011	7.93	Male	Y	Pre-Pandemic
+319	HC19-KC156	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	17/10/2019	26/1/2013	6.73	Male	Y	Pre-Pandemic
+320	HC19-KC157	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	17/10/2019	12/4/2010	9.52	Male	Y	Pre-Pandemic
+321	HC19-KC158	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	17/10/2019	27/10/2010	8.98	Female	Y	Pre-Pandemic
+322	HC19-KC159	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	17/10/2019	16/3/2011	8.59	Female	Y	Pre-Pandemic
+323	HC19-KC160	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	17/10/2019	2/4/2010	9.55	Female	Y	Pre-Pandemic
+324	HC19-KC161	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	17/10/2019	1/1/2011	8.8	Female	Y	Pre-Pandemic
+325	HC19-KC162	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	17/10/2019	2/6/2010	9.38	Female	Y	Pre-Pandemic
+326	HC19-KC163	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	17/10/2019	18/12/2012	6.83	Male	Y	Pre-Pandemic
+327	HC19-KC164	Kisumu-Chulaimbo	Healthy control & holoendemic malaria	17/10/2019	5/2/2011	8.7	Male	Y	Pre-Pandemic
+328	HC19-NM031	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2013	6.62	Female	N	Pre-Pandemic
+329	HC19-NM032	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2015	4.62	Male	N	Pre-Pandemic
+330	HC19-NM033	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2010	9.62	Female	N	Pre-Pandemic
+331	HC19-NM034	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	30/3/2009	10.83	Female	N	Pre-Pandemic
+332	HC19-NM035	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2010	9.62	Female	N	Pre-Pandemic
+333	HC19-NM036	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2013	6.62	Female	N	Pre-Pandemic
+334	HC19-NM037	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2010	9.62	Male	N	Pre-Pandemic
+335	HC19-NM038	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2010	9.62	Male	N	Pre-Pandemic
+336	HC19-NM039	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2014	5.62	Female	N	Pre-Pandemic
+337	HC19-NM040	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	13/6/2013	6.62	Female	N	Pre-Pandemic
+338	HC19-NM041	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2013	6.62	Male	N	Pre-Pandemic
+339	HC19-NM042	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2011	8.62	Male	N	Pre-Pandemic
+340	HC19-NM043	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/5/2012	7.7	Male	N	Pre-Pandemic
+341	HC19-NM044	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	6/3/2013	6.89	Male	N	Pre-Pandemic
+342	HC19-NM045	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2010	9.62	Female	N	Pre-Pandemic
+343	HC19-NM046	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2012	7.62	Female	N	Pre-Pandemic
+344	HC19-NM047	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	20/1/2015	5.02	Female	N	Pre-Pandemic
+345	HC19-NM048	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2015	4.62	Male	N	Pre-Pandemic
+346	HC19-NM049	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2012	7.62	Male	N	Pre-Pandemic
+347	HC19-NM050	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2012	7.62	Male	N	Pre-Pandemic
+348	HC19-NM051	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2008	11.62	Male	N	Pre-Pandemic
+349	HC19-NM052	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2010	9.62	Male	N	Pre-Pandemic
+350	HC19-NM053	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2016	3.61	Male	N	Pre-Pandemic
+351	HC19-NM054	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2015	4.62	Male	N	Pre-Pandemic
+352	HC19-NM055	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2010	9.62	Male	N	Pre-Pandemic
+353	HC19-NM056	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2011	8.62	Male	N	Pre-Pandemic
+354	HC19-NM057	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2012	7.62	Male	N	Pre-Pandemic
+355	HC19-NM058	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2010	9.62	Male	N	Pre-Pandemic
+356	HC19-NM059	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2013	6.62	Male	N	Pre-Pandemic
+357	HC19-NM060	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	15/6/2013	6.62	Male	N	Pre-Pandemic
+358	HC19-NM061	Nandi-Mosoriot	Healthy control & low malaria	25/1/2020	1/3/2013	6.91	Female	N	Pre-Pandemic
+359	HC19-NM062	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2010	9.62	Male	N	Pre-Pandemic
+360	HC19-NM063	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2012	7.62	Female	N	Pre-Pandemic
+361	HC19-NM064	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2010	9.62	Male	N	Pre-Pandemic
+362	HC19-NM065	Nandi-Mosoriot	Healthy control & low malaria	20/1/2020	15/6/2014	5.6	Male	N	Pre-Pandemic
+363	HC19-NM066	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	11/6/2010	9.63	Female	N	Pre-Pandemic
+364	HC19-NM067	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2011	8.62	Male	N	Pre-Pandemic
+365	HC19-NM068	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2010	9.62	Male	N	Pre-Pandemic
+366	HC19-NM069	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2010	9.62	Female	N	Pre-Pandemic
+367	HC19-NM070	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	16/5/2010	9.7	Male	N	Pre-Pandemic
+368	HC19-NM071	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2011	8.62	Male	N	Pre-Pandemic
+369	HC19-NM072	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2014	5.62	Female	N	Pre-Pandemic
+370	HC19-NM073	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2011	8.62	Male	N	Pre-Pandemic
+371	HC19-NM074	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2010	9.62	Female	N	Pre-Pandemic
+372	HC19-NM075	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2011	8.62	Male	N	Pre-Pandemic
+373	HC19-NM076	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2011	8.62	Male	N	Pre-Pandemic
+374	HC19-NM077	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020			Male	N	Pre-Pandemic
+375	HC19-NM078	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2011	8.62	Female	N	Pre-Pandemic
+376	HC19-NM079	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020			Female	N	Pre-Pandemic
+377	HC19-NM080	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2011	8.62	Female	N	Pre-Pandemic
+378	HC19-NM081	Nandi-Mosoriot	Healthy control & low malaria	26/1/2020	15/6/2015	4.62	Male	N	Pre-Pandemic
+379	HC-201K	Mosoriot	Healthy control & low malaria	17/10/2022	1/10/2019	3.05	Male	N	Post-Pandemic
+380	HC-202K	Mosoriot	Healthy control & low malaria	17/10/2022	7/6/2016	6.36	Female	N	Post-Pandemic
+381	HC-203K	Mosoriot	Healthy control & low malaria	17/10/2022	24/5/2019	3.4	Male	N	Post-Pandemic
+382	HC-204K	Mosoriot	Healthy control & low malaria	17/10/2022	3/6/2019	3.38	Female	N	Post-Pandemic
+383	HC-205K	Mosoriot	Healthy control & low malaria	17/10/2022	26/6/2019	3.31	Male	N	Post-Pandemic
+384	HC-206K	Mosoriot	Healthy control & low malaria	17/10/2022	10/12/2017	4.85	Male	N	Post-Pandemic
+385	HC-207K	Mosoriot	Healthy control & low malaria	17/10/2022	5/8/2019	3.2	Male	N	Post-Pandemic
+386	HC-208K	Mosoriot	Healthy control & low malaria	17/10/2022	1/4/2019	3.55	Male	N	Post-Pandemic
+387	HC-209K	Mosoriot	Healthy control & low malaria	18/10/2022	8/9/2017	5.11	Female	N	Post-Pandemic
+388	HC-210K	Mosoriot	Healthy control & low malaria	18/10/2022	8/4/2017	5.53	Male	N	Post-Pandemic
+389	HC-211K	Mosoriot	Healthy control & low malaria	18/10/2022	7/4/2018	4.53	Female	N	Post-Pandemic
+390	HC-212K	Mosoriot	Healthy control & low malaria	18/10/2022	19/4/2019	3.5	Female	N	Post-Pandemic
+391	HC-213K	Mosoriot	Healthy control & low malaria	18/10/2022	20/8/2018	4.16	Male	N	Post-Pandemic
+392	HC-214K	Mosoriot	Healthy control & low malaria	18/10/2022	8/8/2019	3.2	Male	N	Post-Pandemic
+393	HC-215K	Mosoriot	Healthy control & low malaria	18/10/2022	2/8/2016	6.21	Female	N	Post-Pandemic
+394	HC-216K	Mosoriot	Healthy control & low malaria	18/10/2022	25/7/2019	3.24	Female	N	Post-Pandemic
+395	HC-217K	Mosoriot	Healthy control & low malaria	18/10/2022	14/2/2016	6.68	Female	N	Post-Pandemic
+396	HC-218K	Mosoriot	Healthy control & low malaria	18/10/2022	14/5/2017	5.43	Male	N	Post-Pandemic
+397	HC-219K	Mosoriot	Healthy control & low malaria	18/10/2022	23/9/2017	5.07	Male	N	Post-Pandemic
+398	HC-220K	Mosoriot	Healthy control & low malaria	18/10/2022	7/1/2018	4.78	Female	N	Post-Pandemic
+399	HC-221K	Mosoriot	Healthy control & low malaria	18/10/2022	26/7/2017	5.23	Female	N	Post-Pandemic
+400	HC-222K	Mosoriot	Healthy control & low malaria	18/10/2022	22/11/2017	4.91	Female	N	Post-Pandemic
+401	HC-223K	Mosoriot	Healthy control & low malaria	18/10/2022	23/5/2018	4.41	Male	N	Post-Pandemic
+402	HC-224K	Mosoriot	Healthy control & low malaria	18/10/2022	24/11/2018	3.9	Female	N	Post-Pandemic
+403	HC-225K	Mosoriot	Healthy control & low malaria	19/10/2022	10/8/2017	5.19	Female	N	Post-Pandemic
+404	HC-226K	Mosoriot	Healthy control & low malaria	19/10/2022	9/10/2019	3.03	Male	N	Post-Pandemic
+405	HC-227K	Mosoriot	Healthy control & low malaria	19/10/2022	25/5/2019	3.41	Male	N	Post-Pandemic
+406	HC-228K	Mosoriot	Healthy control & low malaria	19/10/2022	20/9/2019	3.08	Male	N	Post-Pandemic
+407	HC-229K	Mosoriot	Healthy control & low malaria	19/10/2022	10/4/2017	5.53	Female	N	Post-Pandemic
+408	HC-230K	Mosoriot	Healthy control & low malaria	19/10/2022	18/11/2017	4.92	Female	N	Post-Pandemic
+409	HC-231K	Mosoriot	Healthy control & low malaria	19/10/2022	2/4/2016	6.55	Female	N	Post-Pandemic
+410	HC-232K	Mosoriot	Healthy control & low malaria	19/10/2022	15/7/2016	6.27	Female	N	Post-Pandemic
+411	HC-233K	Mosoriot	Healthy control & low malaria	20/10/2022	26/10/2016	5.99	Female	N	Post-Pandemic
+412	HC-234K	Mosoriot	Healthy control & low malaria	20/10/2022	4/5/2017	5.47	Female	N	Post-Pandemic
+413	HC-235K	Mosoriot	Healthy control & low malaria	20/10/2022	25/12/2022		Female	N	Post-Pandemic
+414	HC-236K	Mosoriot	Healthy control & low malaria	20/10/2022	11/4/2018	4.53	Female	N	Post-Pandemic
+415	HC-237K	Mosoriot	Healthy control & low malaria	20/10/2022	4/5/2019	3.47	Male	N	Post-Pandemic
+416	HC-238K	Mosoriot	Healthy control & low malaria	20/10/2022	17/8/2017	5.18	Male	N	Post-Pandemic
+417	HC-239K	Mosoriot	Healthy control & low malaria	20/10/2022	26/11/2016	5.9	Male	N	Post-Pandemic
+418	HC-240K	Mosoriot	Healthy control & low malaria	20/10/2022	10/10/2019	3.03	Male	N	Post-Pandemic
+419	HC-241K	Mosoriot	Healthy control & low malaria	20/10/2022	11/12/2015	6.86	Female	N	Post-Pandemic
+420	HC-242K	Mosoriot	Healthy control & low malaria	20/10/2022	8/9/2018	4.12	Male	N	Post-Pandemic
+421	HC-243K	Mosoriot	Healthy control & low malaria	2/10/2022	3/11/2018	3.92	Female	N	Post-Pandemic
+423	HC-245K	Mosoriot	Healthy control & low malaria	20/10/2022	16/10/2019	3.01	Female	N	Post-Pandemic
+424	HC-246K	Mosoriot	Healthy control & low malaria	20/10/2022	5/4/2016	6.55	Male	N	Post-Pandemic
+425	HC-247K	Mosoriot	Healthy control & low malaria	20/10/2022	18/4/2019	3.51	Male	N	Post-Pandemic
+426	HC-248K	Mosoriot	Healthy control & low malaria	20/10/2022	7/7/2018	4.29	Male	N	Post-Pandemic
+427	HC-249K	Mosoriot	Healthy control & low malaria	20/10/2022	10/8/2018	4.2	Female	N	Post-Pandemic
+428	HC-250K	Mosoriot	Healthy control & low malaria	20/10/2022	21/5/2016	6.42	Female	N	Post-Pandemic
+429	HC-251K	Mosoriot	Healthy control & low malaria	20/10/2022	4/7/2016	6.3	Male	N	Post-Pandemic
+430	HC-252K	Mosoriot	Healthy control & low malaria	20/10/2022	21/3/2018	4.59	Female	N	Post-Pandemic
+431	HC-253K	Mosoriot	Healthy control & low malaria	20/10/2022	2/5/2018	4.47	Female	N	Post-Pandemic
+432	HC-254K	Mosoriot	Healthy control & low malaria	21/10/2022	9/1/2017	5.78	Male	N	Post-Pandemic
+433	HC-255K	Mosoriot	Healthy control & low malaria	21/10/2022	9/8/2018	4.2	Female	N	Post-Pandemic
+434	HC-256K	Mosoriot	Healthy control & low malaria	21/10/2022	4/10/2017	5.05	Male	N	Post-Pandemic
+435	HC-257K	Mosoriot	Healthy control & low malaria	21/10/2022	2/3/2019	3.64	Female	N	Post-Pandemic
+436	HC-258K	Mosoriot	Healthy control & low malaria	21/10/2022	12/12/2015	6.86	Female	N	Post-Pandemic
+437	HC-259K	Mosoriot	Healthy control & low malaria	21/10/2022	5/4/2017	5.55	Male	N	Post-Pandemic
+438	HC-260K	Mosoriot	Healthy control & low malaria	21/10/2022	20/4/2018	4.51	Female	N	Post-Pandemic
+439	HC-261K	Mosoriot	Healthy control & low malaria	21/10/2022	4/7/2017	5.3	Male	N	Post-Pandemic
+440	HC-262K	Mosoriot	Healthy control & low malaria	21/10/2022	26/8/2019	3.16	Male	N	Post-Pandemic
+441	HC-263K	Mosoriot	Healthy control & low malaria	21/10/2022	22/9/2018	4.08	Female	N	Post-Pandemic
+442	HC-264K	Mosoriot	Healthy control & low malaria	21/10/2022	12/11/2016	5.94	Female	N	Post-Pandemic
+443	HC-265K	Mosoriot	Healthy control & low malaria	21/10/2022	17/4/2019	3.52	Male	N	Post-Pandemic
+444	HC-266K	Mosoriot	Healthy control & low malaria	21/10/2022	18/12/2018	3.84	Female	N	Post-Pandemic
+445	HC-267K	Mosoriot	Healthy control & low malaria	21/10/2022	22/11/2017	4.92	Female	N	Post-Pandemic
+446	HC-268K	Mosoriot	Healthy control & low malaria	21/10/2022	3/8/2018	4.22	Male	N	Post-Pandemic
+447	HC-269K	Mosoriot	Healthy control & low malaria	21/10/2022	18/10/2018	4.01	Female	N	Post-Pandemic
+448	HC-270K	Mosoriot	Healthy control & low malaria	21/10/2022	28/6/2017	5.32	Male	N	Post-Pandemic
+449	HC-271K	Mosoriot	Healthy control & low malaria	21/10/2022	13/3/2019	3.61	Male	N	Post-Pandemic
+450	HC-272K	Mosoriot	Healthy control & low malaria	21/10/2022	9/9/2017	5.12	Male	N	Post-Pandemic
+451	HC-273K	Mosoriot	Healthy control & low malaria	21/10/2022	14/1/2017	5.77	Male	N	Post-Pandemic
+452	HC-274K	Mosoriot	Healthy control & low malaria	21/10/2022	29/5/2016	6.4	Female	N	Post-Pandemic
+453	HC-275K	Mosoriot	Healthy control & low malaria	21/10/2022	24/1/2019	3.74	Male	N	Post-Pandemic
+455	HC-277K	Mosoriot	Healthy control & low malaria	21/10/2022	10/5/2019	3.45	Female	N	Post-Pandemic
+456	HC-278K	Mosoriot	Healthy control & low malaria	21/10/2022	6/6/2016	6.38	Female	N	Post-Pandemic
+457	HC-279K	Mosoriot	Healthy control & low malaria	21/10/2022	4/11/2017	4.96	Female	N	Post-Pandemic
+458	HC-280K	Mosoriot	Healthy control & low malaria	22/10/2022	12/12/2018	3.86	Male	N	Post-Pandemic
+459	HC-281K	Mosoriot	Healthy control & low malaria	22/10/2022	23/2/2017	5.66	Male	N	Post-Pandemic
+460	HC-282K	Mosoriot	Healthy control & low malaria	22/10/2022	13/12/2017	4.86	Male	N	Post-Pandemic
+461	HC-283K	Mosoriot	Healthy control & low malaria	22/10/2022	5/10/2017	5.05	Male	N	Post-Pandemic
+462	HC-284K	Mosoriot	Healthy control & low malaria	22/10/2022	30/1/2016	6.73	Female	N	Post-Pandemic
+463	HC-285K	Mosoriot	Healthy control & low malaria	22/10/2022	2/2/2017	5.72	Male	N	Post-Pandemic
+464	HC-286K	Mosoriot	Healthy control & low malaria	22/10/2022	3/2/2017	5.72	Male	N	Post-Pandemic
+465	HC-287K	Mosoriot	Healthy control & low malaria	22/10/2022	23/11/2018	3.92	Male	N	Post-Pandemic
+466	HC-288K	Mosoriot	Healthy control & low malaria	22/10/2022	30/7/2018	4.23	Male	N	Post-Pandemic
+467	HC-289K	Mosoriot	Healthy control & low malaria	22/10/2022	29/9/2018	4.07	Male	N	Post-Pandemic
+468	HC-290K	Mosoriot	Healthy control & low malaria	22/10/2022	2/12/2018	3.89	Female	N	Post-Pandemic
+469	HC-291K	Mosoriot	Healthy control & low malaria	22/10/2022	10/11/2015	6.95	Male	N	Post-Pandemic
+470	HC-292K	Mosoriot	Healthy control & low malaria	22/10/2022	3/5/2016	6.47	Male	N	Post-Pandemic
+471	HC-293K	Mosoriot	Healthy control & low malaria	22/10/2022	6/9/2017	5.13	Male	N	Post-Pandemic
+472	HC-294K	Mosoriot	Healthy control & low malaria	22/10/2022	18/9/2018	4.1	Male	N	Post-Pandemic
+473	HC-295K	Mosoriot	Healthy control & low malaria	22/10/2022	20/9/2017	5.09	Female	N	Post-Pandemic
+474	HC-296K	Mosoriot	Healthy control & low malaria	22/10/2022	2/8/2016	6.22	Female	N	Post-Pandemic
+475	HC-297K	Mosoriot	Healthy control & low malaria	22/10/2022	11/1/2019	3.78	Male	N	Post-Pandemic
+476	HC-298K	Mosoriot	Healthy control & low malaria	22/10/2022	18/10/2017	5.01	Female	N	Post-Pandemic
+477	HC-299K	Mosoriot	Healthy control & low malaria	22/10/2022	4/4/2017	5.55	Male	N	Post-Pandemic
+478	HC-300K	Mosoriot	Healthy control & low malaria	22/10/2022	8/1/2019	3.79	Male	N	Post-Pandemic
+480	MBL-125	MTRH	BL cancer case	24/6/2020	17/6/2007	13.03	Male	Y	Post-Pandemic
+481	MBL-126	MTRH	BL cancer case	30/6/2020	6/6/2016	4.07	Male	Y	Post-Pandemic
+482	MBL-127	MTRH	BL cancer case	3/7/2020	6/6/2013	7.08	Male	Y	Post-Pandemic
+483	MBL-128	MTRH	BL cancer case	3/7/2020	6/6/2016	4.08	Female	Y	Post-Pandemic
+484	MBL-129	MTRH	BL cancer case	13/7/2020	4/4/2008	12.28	Female	Y	Post-Pandemic
+485	MBL-130	MTRH	BL cancer case	14/7/2020	10/8/2017	2.93	Male	Y	Post-Pandemic
+486	MBL-131	MTRH	BL cancer case	23/7/2020	11/5/2018	2.2	Female	Y	Post-Pandemic
+487	MBL-132	MTRH	BL cancer case	4/8/2020	27/7/2014	6.03	Female	Y	Post-Pandemic
+488	MBL-133	MTRH	BL cancer case	8/9/2020	6/6/2017	3.26	Female	Y	Post-Pandemic
+489	MBL-134	MTRH	BL cancer case	9/9/2020	10/10/2018	1.92	Female	Y	Post-Pandemic
+490	MBL-135	MTRH	BL cancer case	6/10/2020	21/7/2007	13.22	Male	Y	Post-Pandemic
+491	MBL-136	MTRH	BL cancer case	3/11/2020	1/1/2010	10.85	Male	Y	Post-Pandemic
+492	MBL-137	MTRH	BL cancer case	4/11/2020	12/12/2015	4.9	Male	Y	Post-Pandemic
+493	MBL-138	MTRH	BL cancer case	12/11/2020	15/6/2008	12.42	Male	Y	Post-Pandemic
+494	MBL-139	MTRH	BL cancer case	18/11/2020	6/6/2015	5.46	Male	Y	Post-Pandemic
+506	MBL-151	MTRH	BL cancer case	19/7/2021	28/8/2016	4.89	Male	Y	Post-Pandemic
+507	MBL-152	MTRH	BL cancer case	9/8/2021	21/3/2013	8.39	Male	Y	Post-Pandemic
+508	MBL-153	MTRH	BL cancer case	23/8/2021	1/1/2011	10.65	Male	Y	Post-Pandemic
+509	MBL-154	MTRH	BL cancer case	24/8/2021	26/12/2017	3.66	Female	Y	Post-Pandemic
+511	MBL-156	MTRH	BL cancer case	6/9/2021	13/9/2007	13.99	Female	Y	Post-Pandemic
+512	MBL-157	MTRH	BL cancer case	14/9/2021	13/6/2011	10.26	Female	Y	Post-Pandemic
+513	MBL-158	MTRH	BL cancer case	14/9/2021	15/6/2011	10.26	Female	Y	Post-Pandemic
+514	MBL-159	MTRH	BL cancer case	14/9/2021	16/9/2018	3	Male	Y	Post-Pandemic
+515	MBL-160	MTRH	BL cancer case	21/9/2021	1/1/2014	7.73	Female	Y	Post-Pandemic
+516	MBL-161	MTRH	BL cancer case	29/9/2021	11/4/2013	8.47	Male	Y	Post-Pandemic
+517	MBL-162	MTRH	BL cancer case	29/9/2021	15/6/2020	1.29	Female	Y	Post-Pandemic
+518	MBL-163	MTRH	BL cancer case	5/10/2021	15/6/2007	14.32	Female	Y	Post-Pandemic
+519	MBL-164	MTRH	BL cancer case	22/10/2021	28/10/2009	11.99	Female	Y	Post-Pandemic
+520	MBL-165	MTRH	BL cancer case	25/10/2021	23/10/2013	8.01	Female	Y	Post-Pandemic
+522	MBL-167	MTRH	BL cancer case	1/11/2021	10/10/2016	5.06	Female	Y	Post-Pandemic
+523	MBL-168	MTRH	BL cancer case	4/11/2021	29/10/2017	4.02	Male	Y	Post-Pandemic
+524	MBL-169	MTRH	BL cancer case	15/11/2021	15/6/2013	8.42	Male	Y	Post-Pandemic
+525	MBL-170	MTRH	BL cancer case	23/11/2021	10/10/2010	11.13	Male	Y	Post-Pandemic
+526	MBL-171	MTRH	BL cancer case	1/12/2021	1/1/2016	5.92	Male	Y	Post-Pandemic
+527	MBL-172	MTRH	BL cancer case	30/11/2021	1/1/2019	2.92	Male	Y	Post-Pandemic
+528	MBL-173	MTRH	BL cancer case	7/12/2021	1/1/2008	13.94	Male	Y	Post-Pandemic
+529	MBL-174	MTRH	BL cancer case	15/12/2021	5/6/2018	3.53	Male	Y	Post-Pandemic
+530	MBL-175	MTRH	BL cancer case	16/12/2021	1/1/2008	13.97	Male	Y	Post-Pandemic
+531	MBL-176	MTRH	BL cancer case	13/1/2022	1/9/2014	7.37	Female	Y	Post-Pandemic
+532	MBL-177	MTRH	BL cancer case	24/1/2022	1/1/2018	4.07	Male	Y	Post-Pandemic
+533	MBL-178	MTRH	BL cancer case	26/1/2022	1/1/2012	10.08	Male	Y	Post-Pandemic
+534	MBL-179	MTRH	BL cancer case	15/2/2022	1/1/2017	5.13	Male	Y	Post-Pandemic
+535	MBL-180	MTRH	BL cancer case	16/2/2022	1/7/2012	9.64	Female	Y	Post-Pandemic
+536	MBL-181	MTRH	BL cancer case	23/2/2022	1/1/2020	2.15	Female	Y	Post-Pandemic
+537	MBL-182	MTRH	BL cancer case	23/2/2022	1/4/2010	11.91	Male	Y	Post-Pandemic
+538	MBL-183	MTRH	BL cancer case	9/3/2022	1/6/2010	11.78	Female	Y	Post-Pandemic
+539	MBL-184	MTRH	BL cancer case	23/3/2022	1/1/2010	12.23	Male	Y	Post-Pandemic
+540	MBL-185	MTRH	BL cancer case	25/3/2022	25/9/2018	3.5	Male	Y	Post-Pandemic
+541	MBL-186	MTRH	BL cancer case	7/4/2022	1/1/2010	12.27	Female	Y	Post-Pandemic
+542	MBL-187	MTRH	BL cancer case	19/4/2022	6/6/2016	5.87	Male	Y	Post-Pandemic
+543	MBL-188	MTRH	BL cancer case	19/4/2022	6/6/2013	8.87	Female	Y	Post-Pandemic
+544	MBL-189	MTRH	BL cancer case	29/4/2022	26/7/2013	8.76	Female	Y	Post-Pandemic
+545	MBL-190	MTRH	BL cancer case	29/4/2022	6/4/2015	7.07	Female	Y	Post-Pandemic
+546	MBL-191	MTRH	BL cancer case	20/5/2022	1/5/2007	15.06	Male	Y	Post-Pandemic
+547	MBL-192	MTRH	BL cancer case	26/5/2022	6/6/2010	11.98	Male	Y	Post-Pandemic
+548	MBL-193	MTRH	BL cancer case	7/6/2022	4/5/2019	3.1	Male	Y	Post-Pandemic
+549	MBL-194	MTRH	BL cancer case	7/6/2022	1/1/2016	6.44	Female	Y	Post-Pandemic
+550	MBL-195	MTRH	BL cancer case	8/6/2022	25/12/2017	4.45	Male	Y	Post-Pandemic
+551	MBL-196	MTRH	BL cancer case	14/7/2022	25/1/2019	3.47	Male	Y	Post-Pandemic
+552	MBL-197	MTRH	BL cancer case	28/7/2022	15/6/2013	9.12	Male	Y	Post-Pandemic
+553	MBL-198	MTRH	BL cancer case	17/8/2022	6/6/2017	5.2	Female	Y	Post-Pandemic
+554	MBL-199	MTRH	BL cancer case	24/8/2022	10/12/2016	5.71	Female	Y	Post-Pandemic
+555	MBL-200	MTRH	BL cancer case	29/8/2022	6/6/2018	4.23	Male	Y	Post-Pandemic
+556	MBL-201	MTRH	BL cancer case	8/9/2022	20/6/2014	8.22	Male	Y	Post-Pandemic
+557	MBL-202	MTRH	BL cancer case	21/9/2022	1/5/2016	6.39	Male	Y	Post-Pandemic
+558	MBL-203	MTRH	BL cancer case	27/9/2022	16/6/2020	2.28	Male	Y	Post-Pandemic
+559	MBL-204	MTRH	BL cancer case	22/9/2022	2/1/2020	2.72	Female	Y	Post-Pandemic
+560	BL763	JOORTH	BL cancer case	17/3/2020	8/5/2015	4.86	Male	Y	Post-Pandemic
+561	BL764	JOORTH	BL cancer case	17/3/2020	30/8/2017	2.55	Male	Y	Post-Pandemic
+562	BL765	JOORTH	BL cancer case	6/5/2020	18/11/2013	6.47	Male	Y	Post-Pandemic
+563	BL766	JOORTH	BL cancer case	20/5/2020	28/2/2016	4.23	Female	Y	Post-Pandemic
+564	BL767	JOORTH	BL cancer case	20/5/2020	11/1/2011	9.36	Male	Y	Post-Pandemic
+565	BL768	JOORTH	BL cancer case	3/8/2020	4/5/2017	3.25	Female	Y	Post-Pandemic
+566	BL769	JOORTH	BL cancer case	15/8/2015	10/11/2012	2.76	Male	Y	Pre-Pandemic
+567	BL770	JOORTH	BL cancer case	8/9/2020	18/1/2019	1.64	Male	Y	Post-Pandemic
+568	BL771	JOORTH	BL cancer case	28/9/2020	3/11/2014	5.91	Female	Y	Post-Pandemic
+570	BL773	JOORTH	BL cancer case	12/10/2021	10/11/2011	9.93	Female	Y	Post-Pandemic
+571	BL774	JOORTH	BL cancer case	25/10/2021	17/12/2008	12.86	Male	Y	Post-Pandemic
+572	BL775	JOORTH	BL cancer case	9/12/2021	17/1/2013	8.9	Male	Y	Post-Pandemic
+573	BL776	JOORTH	BL cancer case	14/4/2022	1/1/2015	7.29	Male	Y	Post-Pandemic
+574	BL777	JOORTH	BL cancer case	29/6/2022	13/5/2020	2.13	Male	Y	Post-Pandemic
+575	BL778	JOORTH	BL cancer case	20/7/2022	25/5/2016	6.16	Male	Y	Post-Pandemic
+576	BL779	JOORTH	BL cancer case	4/8/2022	20/1/2020	2.54	Male	Y	Post-Pandemic
+577	MBL-059	MTRH	BL cancer case	1/2/2018	22/2/2010	7.95	Female	Y	Pre-Pandemic
+578	MBL-108	MTRH	BL cancer case	28/3/2019	1/1/2012	7.24	Female	Y	Pre-Pandemic
+579	BL739	JOORTH	BL cancer case	19/12/2017	12/8/2008	9.36	Female	Y	Pre-Pandemic
+580	BL648	JOORTH	BL cancer case	25/3/2014	1/6/2005	8.82	Male	Y	Pre-Pandemic
+581	BL654	JOORTH	BL cancer case	21/7/2014	23/11/2002	11.67	Female	Y	Pre-Pandemic
+582	BL671	JOORTH	BL cancer case	17/11/2014	17/7/2005	9.34	Female	Y	Pre-Pandemic
+583	BL683	JOORTH	BL cancer case	9/3/2015	1/1/2005	10.19	Male	Y	Pre-Pandemic
+584	BL701	JOORTH	BL cancer case	16/9/2015	16/9/2006	9.01	Female	Y	Pre-Pandemic
+585	BL702	JOORTH	BL cancer case	5/11/2015	1/7/2005	10.35	Male	Y	Pre-Pandemic
+586	BL705	JOORTH	BL cancer case	30/11/2015	30/10/2003	12.09	Male	Y	Pre-Pandemic
+587	BL722	JOORTH	BL cancer case	18/9/2016	18/9/2008	8.01	Female	Y	Pre-Pandemic
+588	BL735	JOORTH	BL cancer case	14/11/2017	28/2/2010	7.72	Male	Y	Pre-Pandemic
+589	BL736	JOORTH	BL cancer case	1/12/2017	15/10/2013	4.13	Male	Y	Pre-Pandemic
+590	BL740	JOORTH	BL cancer case	25/2/2018	10/10/2010	7.38	Male	Y	Pre-Pandemic
+591	BL742	JOORTH	BL cancer case	13/3/2018	4/5/2015	2.86	Female	Y	Pre-Pandemic
