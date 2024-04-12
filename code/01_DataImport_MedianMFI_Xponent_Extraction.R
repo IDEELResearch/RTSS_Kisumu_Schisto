@@ -4,11 +4,10 @@
   # Keep raw data files within the Luminex/raw data folder. 
        # Required libraries
        library(tidyverse)
+       library(here)
 
-
- 
 # Directory (raw Xponent data) and Loop initiation ----
-directory <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/raw/luminex/"
+directory <- "data/raw/luminex/"
 
     # Get list of CSV files in the directory
     csv_files <- list.files(directory, pattern = "\\.csv$", full.names = TRUE)
@@ -98,7 +97,7 @@ directory <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/raw/lum
           assign(paste0(file_name_without_ext, "_results_df"), results_df)
           
       # Export the final data frame to clean data/luminex
-          export_path <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/clean/luminex/"
+          export_path <- "data/clean/luminex/"
           export_file <- paste0(export_path, file_name_without_ext, "_results_df.csv")
           write.csv(results_df, file = export_file, row.names = FALSE)
 

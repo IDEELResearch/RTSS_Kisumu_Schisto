@@ -5,7 +5,7 @@
 library(tidyverse)
 
 # Directory
-directory <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/clean/luminex"
+directory <- "data/clean/luminex"
 
       # Read each CSV file into a list of data frames
       list_of_dfs <- lapply(list.files(path = directory, pattern = "\\.csv$", full.names = TRUE), 
@@ -78,7 +78,7 @@ directory <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/clean/l
 
 # rtss_df export
        # File path for export
-          file_path <- "/Users/sahal/Documents/R Projects/RTSS_Kisumu_Schisto/data/clean/RTSS_Luminex_comp.csv"
+          file_path <- "data/clean/Luminex_comp.csv"
                   
       # Dataframe export
             write.csv(rtss_df, file = file_path, row.names = FALSE)
