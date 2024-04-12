@@ -112,10 +112,10 @@ This code is extracting standards data from all plates. The list of `Plates` is 
                 standard_mfi_df <- standard_mfi_df %>%
                   mutate(Plate = apply(standard_mfi_df[plate_cols], 1, get_plate_value))
   
-             # Create Antigen and Serology columns based on Ab_Ag column
+             # Create Antigen and Subclass columns based on Ab_Ag column
                 standard_mfi_df <- standard_mfi_df %>%
                   mutate(
-                    Serology = sub("_.+", "", Ab_Ag),  # Extract what's before the "_"
+                    Subclass = sub("_.+", "", Ab_Ag),  # Extract what's before the "_"
                     Antigen = sub(".+_", "", Ab_Ag)    # Extract what's after the "_"
                   )
 # show Plates 
@@ -131,7 +131,7 @@ This is a scatterplot of all standards across the plates listed above
 # Generate plots ----
     # All plates- scatterplot based on Antigen
 
-    ggplot(standard_mfi_df, aes(x = Dilution_Factor, y = log10(MFI), color = Plate)) +
+    ggplot(standard_mfi_df, aes(x = Dilution_Factor, y = log10(MFI), color = Subclass)) +
   geom_point() +
   labs(x = "Dilution Factor", y = "log10(MFI)", color = "Plate") +
   ggtitle("MFI Standard curve based on Plates")
@@ -145,9 +145,9 @@ This is the standard curve for each antigen. Pick which curve behaves logarithmi
     # Standard curves for each antigen
  plots <- standard_mfi_df %>%
   split(.$Antigen) %>%
-  map(~ ggplot(.x, aes(x = Dilution_Factor, y = log10(MFI), color = Plate)) +
+  map(~ ggplot(.x, aes(x = Dilution_Factor, y = log10(MFI), color = Subclass)) +
         geom_point() +
-        labs(x = "Log 10 Dilution Factor", y = "MFI", color = "Plate") +
+        labs(x = "Dilution Factor", y = "log10(MFI)", color = "Subclass") +
         ggtitle(paste("MFI Standard curve for Antigen:", unique(.x$Antigen))))
 
 # Print the plots
@@ -155,26 +155,26 @@ plots
 ```
 
 # Standardization
-For our study, I think we should use `AMA1` only. These are the plots based on `Serology` type. It seems serology influences the behavior of the curves but all seem to respond logarithmically. 
+For our study, I think we should use `AMA1` only. These are the plots based on `Subclass` type. It seems Subclass influences the behavior of the curves but all seem to respond logarithmically. 
 
 ```{r}
 
     # Filter data for AMA-1 antigen
     ama1_data <- standard_mfi_df %>% 
-      filter(Antigen == "AMA1")
+      filter(Antigen == "HRPII")
 
 # Filter out rows with zero dilution factor or NA MFI
 ama1_data <- ama1_data %>% 
   filter(Dilution_Factor != 0 & !is.na(MFI))
 
-# Create scatterplot with filtered data and facet by Serology
+# Create scatterplot with filtered data and facet by Subclass
 ama1_plot <- ggplot(ama1_data, aes(x = Dilution_Factor, y = log10(MFI))) +
-  geom_point(aes(color = Serology)) +
+  geom_point(aes(color = Subclass)) +
   geom_smooth(method = "lm", formula = y ~ log(x), se = FALSE) +  # Add logarithmic line of best fit
-  labs(x = "Dilution Factor", y = "log10(MFI)", color = "Serology") +
-  ggtitle("MFI Standard Curve for AMA1 based on Serology") +
+  labs(x = "Dilution Factor", y = "log10(MFI)", color = "Subclass") +
+  ggtitle("MFI Standard Curve for AMA1 based on Subclass") +
   theme_minimal() +
-  facet_wrap(~ Serology, scales = "free_y")
+  facet_wrap(~ Subclass, scales = "free_y")
 
 # Print the plot
 print(ama1_plot)
@@ -182,22 +182,22 @@ print(ama1_plot)
 
 ```
 
-## Standardization based on Serology type for AMA1
+## Standardization based on Subclass type for AMA1
 
 ```{r}
-# Split data by Serology
-ama1_data_split <- split(ama1_data, ama1_data$Serology)
+# Split data by Subclass
+ama1_data_split <- split(ama1_data, ama1_data$Subclass)
 
 # Create a list to store plots
 ama1_plots <- list()
 
-# Create scatterplot for each Serology level with a logarithmic regression line
-for (serology_level in names(ama1_data_split)) {
-  ama1_plots[[serology_level]] <- ggplot(ama1_data_split[[serology_level]], aes(x = Dilution_Factor, y = log10(MFI), color = Plate)) +
+# Create scatterplot for each Subclass level with a logarithmic regression line
+for (Subclass_level in names(ama1_data_split)) {
+  ama1_plots[[Subclass_level]] <- ggplot(ama1_data_split[[Subclass_level]], aes(x = Dilution_Factor, y = log10(MFI), color = Plate)) +
     geom_point(na.rm = TRUE) +
     geom_smooth(method = "lm", formula = y ~ log(x), se = FALSE, na.rm = TRUE) + # Add logarithmic regression line
     labs(x = "Dilution Factor", y = "log10(MFI)", color = "Plate") +
-    ggtitle(paste("MFI Standard Curve for AMA1 - Serology:", serology_level)) +
+    ggtitle(paste("MFI Standard Curve for AMA1 - Subclass:", Subclass_level)) +
     theme_minimal()
 }
 
@@ -206,5 +206,12 @@ for (i in seq_along(ama1_plots)) {
   print(ama1_plots[[i]])
 }
 ```
+
+# MFI Correction
+Pick a `Dilution_Factor` value that is within the linear range of the curve. This will be the `Reference_Dilution` 
+For this study, we will use *-3* 
+This reference dilution is used to calculate the `Correction_Factor`
+
+
 
 
