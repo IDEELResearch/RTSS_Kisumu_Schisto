@@ -18,7 +18,7 @@ knitr::opts_knit$set()
 
 ## Aim
 
-This code aims to do create MFI scaling factors for individuals plates to standardize MFI values. Please run the first doc (I'll change this later so it's a link) prior to running this
+This code aims to do create MFI scaling factors for individuals plates to standardize MFI values. Please run the [LuminexCompileExperiment_2024_03_07.Rmd](link) file. 
 
 
 ### R Markdown
@@ -157,7 +157,7 @@ plots
 # Standardization
 For our study, I think we should use `AMA1` only. These are the plots based on `Subclass` type. It seems Subclass influences the behavior of the curves but all seem to respond logarithmically. 
 
-```{r}
+```{r warning=FALSE}
 
     # Filter data for AMA-1 antigen
     ama1_data <- standard_mfi_df %>% 
@@ -184,7 +184,7 @@ print(ama1_plot)
 
 ## Standardization based on Subclass type for AMA1
 
-```{r}
+```{r warning=FALSE}
 # Split data by Subclass
 ama1_data_split <- split(ama1_data, ama1_data$Subclass)
 
