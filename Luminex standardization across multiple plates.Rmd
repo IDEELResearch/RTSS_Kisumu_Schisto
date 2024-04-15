@@ -155,62 +155,97 @@ plots
 ```
 
 # Standardization
-For our study, I think we should use `AMA1` only. These are the plots based on `Subclass` type. It seems Subclass influences the behavior of the curves but all seem to respond logarithmically. 
+Define your `standard_antigen` of interest. The code after this will create Log10(MFI) plots based on dilution factor
 
-```{r warning=FALSE}
+```{r Define standard antigen, warning=FALSE}
+# Define the standard antigen
+standard_antigen <- "AMA1"
+```
 
-    # Filter data for AMA-1 antigen
-    ama1_data <- standard_mfi_df %>% 
-      filter(Antigen == "HRPII")
-
-# Filter out rows with zero dilution factor or NA MFI
-ama1_data <- ama1_data %>% 
-  filter(Dilution_Factor != 0 & !is.na(MFI))
-
-# Create scatterplot with filtered data and facet by Subclass
-ama1_plot <- ggplot(ama1_data, aes(x = Dilution_Factor, y = log10(MFI))) +
-  geom_point(aes(color = Subclass)) +
-  geom_smooth(method = "lm", formula = y ~ log(x), se = FALSE) +  # Add logarithmic line of best fit
-  labs(x = "Dilution Factor", y = "log10(MFI)", color = "Subclass") +
-  ggtitle("MFI Standard Curve for AMA1 based on Subclass") +
-  theme_minimal() +
-  facet_wrap(~ Subclass, scales = "free_y")
-
-# Print the plot
-print(ama1_plot)
-
+```{r Standard Ag plots, warning=FALSE}
+# No input required
+      
+      # Filter data for the standard antigen
+      standard_filtered_data <- standard_mfi_df %>% 
+        filter(Antigen == standard_antigen)
+      
+      # Filter out rows with zero dilution factor or NA MFI
+      standard_filtered_data <- standard_filtered_data %>% 
+        filter(Dilution_Factor != 0 & !is.na(MFI))
+      
+      # Create scatterplot with filtered data and facet by Subclass
+      standard_plot <- ggplot(filtered_data, aes(x = Dilution_Factor, y = log10(MFI))) +
+        geom_point(aes(color = Subclass)) +
+        geom_smooth(method = "lm", formula = y ~ log(x), se = FALSE) +  
+        labs(x = "Dilution Factor", y = "log10(MFI)", color = "Subclass") +
+        ggtitle(paste("MFI Standard Curve for", standard_antigen, "based on Subclass")) +
+        theme_minimal() +
+        facet_wrap(~ Subclass, scales = "free_y")
+      
+      # Print the plot
+      print(standard_plot)
 
 ```
 
-## Standardization based on Subclass type for AMA1
+## Standardization based on Subclass type for Standard Antigen
 
-```{r warning=FALSE}
-# Split data by Subclass
-ama1_data_split <- split(ama1_data, ama1_data$Subclass)
-
-# Create a list to store plots
-ama1_plots <- list()
-
-# Create scatterplot for each Subclass level with a logarithmic regression line
-for (Subclass_level in names(ama1_data_split)) {
-  ama1_plots[[Subclass_level]] <- ggplot(ama1_data_split[[Subclass_level]], aes(x = Dilution_Factor, y = log10(MFI), color = Plate)) +
-    geom_point(na.rm = TRUE) +
-    geom_smooth(method = "lm", formula = y ~ log(x), se = FALSE, na.rm = TRUE) + # Add logarithmic regression line
-    labs(x = "Dilution Factor", y = "log10(MFI)", color = "Plate") +
-    ggtitle(paste("MFI Standard Curve for AMA1 - Subclass:", Subclass_level)) +
-    theme_minimal()
-}
-
-# Print each plot in the list
-for (i in seq_along(ama1_plots)) {
-  print(ama1_plots[[i]])
-}
+```{r Standard antigen- subclass plots, warning=FALSE}
+      # No input required
+      # Split data by Subclass
+      standard_data_split <- split(standard_filtered_data, standard_filtered_data$Subclass)
+      
+      # Create a list to store plots
+      standard_plots <- list()
+      
+      # Create scatterplot for each Subclass level with a logarithmic regression line
+      for (Subclass_level in names(standard_data_split)) {
+        standard_plots[[Subclass_level]] <- ggplot(standard_data_split[[Subclass_level]], aes(x = Dilution_Factor, y = log10(MFI), color = Plate)) +
+          geom_point(na.rm = TRUE) +
+          labs(x = "Dilution Factor", y = "log10(MFI)", color = "Plate") +
+          ggtitle(paste("MFI Standard Curve for", standard_antigen,"- Subclass:", Subclass_level)) +
+          theme_minimal()
+      }
+      
+      # Print each plot in the list
+      for (i in seq_along(standard_plots)) {
+        print(standard_plots[[i]])
+      }
 ```
 
 # MFI Correction
+
 Pick a `Dilution_Factor` value that is within the linear range of the curve. This will be the `Reference_Dilution` 
 For this study, we will use *-3* 
 This reference dilution is used to calculate the `Correction_Factor`
+
+### 1. Line of best fit for all plates
+
+Using `standard_antigen`, we will plot and store the line of best for the standard curve from each plate. 
+
+```{r}
+# Define the standard antigen
+standard_antigen <- "AMA1"
+
+# Filter data for the standard antigen
+paste(standard_antigen, "_data", sep = "") <- standard_mfi_df %>% 
+  filter(Antigen == standard_antigen)
+
+# Filter out rows with zero dilution factor or NA MFI
+paste(standard_antigen, "_data", sep = "") <- paste(standard_antigen, "_data", sep = "") %>% 
+  filter(Dilution_Factor != 0 & !is.na(MFI))
+
+# Create scatterplot with filtered data and facet by Plate column
+paste(standard_antigen, "_plot", sep = "") <- ggplot(paste(standard_antigen, "_data", sep = ""), aes(x = Dilution_Factor, y = log10(MFI))) +
+  geom_point(aes(color = Subclass)) +
+  geom_smooth(method = "lm", formula = y ~ log(x), se = FALSE) +  
+  labs(x = "Dilution Factor", y = "log10(MFI)", color = "Subclass") +
+  ggtitle(paste("MFI Standard Curve for", standard_antigen, "based on Subclass")) +
+  theme_minimal() +
+  facet_wrap(~ Plate, scales = "free_y")
+
+# Print the plot
+print(paste(standard_antigen, "_plot", sep = ""))
+
 
 
 
