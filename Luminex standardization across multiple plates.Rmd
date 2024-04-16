@@ -41,7 +41,7 @@ DEVELOPER NOTES
 -->
 ```
 ```{r Library loads, include=FALSE}
-# No further input required
+# No input required
             library(tidyverse)
             library(here)
             library(ggpubr)
@@ -56,9 +56,9 @@ DEVELOPER NOTES
 
 # Standard curves
 ### Generation of standards dataframe 
-This code is extracting standards data from all plates. The list of `Plates` is listed below
+This code is extracting standards data from all plates. The list of `Plates` is listed bellow
 ```{r Generate standard dataframes, echo=FALSE, warning=FALSE}
-# No further input required
+# No input required
   # Run previous "code" files sequentially
        # List all R files in the "code" folder
         code_files <- list.files("code", pattern = "*.R", full.names = TRUE)
@@ -132,37 +132,46 @@ This code is extracting standards data from all plates. The list of `Plates` is 
 This is the standard curve for each antigen. Pick which curve behaves logarithmically.
 
 ```{r Antigen standard curves, echo=FALSE, warning=FALSE}
-# Function to calculate correlation and R-squared for each subset
-calculate_correlation <- function(data) {
-  correlation <- cor(data$Dilution_Factor, data$log10_MFI, method = "pearson")
-  r_squared <- correlation^2
-  return(data.frame(correlation = correlation, r_squared = r_squared))
-}
+# No input required    
+     # Function to calculate correlation and R-squared for each subset
+      calculate_correlation <- function(data) {
+        complete_cases <- complete.cases(data$Dilution_Factor, data$log10_MFI)
+        if (sum(complete_cases) < 2) { # Need at least 2 points for correlation
+          return(data.frame(correlation = NA, r_squared = NA))
+        }
+        correlation <- cor(data$Dilution_Factor[complete_cases], data$log10_MFI[complete_cases], method = "pearson")
+        r_squared <- correlation^2
+        return(data.frame(correlation = correlation, r_squared = r_squared))
+      }
+      
+      # Standard curves for each antigen
+      plots <- standard_mfi_df %>%
+        split(.$Antigen) %>%
+        map(~ {
+          # Check unique Subclass values
+          print(unique(.x$Subclass))
+          
+          # Calculate correlation and R-squared for each Subclass
+          correlation_values <- .x %>%
+            group_by(Subclass) %>%
+            do(calculate_correlation(.))
+          # Create plot without filtering data and facet by Subclass
+          ggplot(.x, aes(x = Dilution_Factor, y = log10_MFI, color = Subclass)) +
+            geom_point() +
+            geom_smooth(method = "lm", se = FALSE, color = "blue") +
+            labs(x = "Dilution Factor", y = "log10(MFI)", color = "Subclass") +
+            ggtitle(paste("MFI Standard curve for Antigen:", unique(.x$Antigen))) +
+            theme_minimal() +
+            facet_wrap(~ Subclass, scales = "free_y") +
+            # Add R-squared values
+            geom_text(data = correlation_values, aes(label = paste("R^2 =", round(r_squared, 2))),
+                      x = Inf, y = -Inf, hjust = 1, vjust = 0)
+        })
+      
+      # Print the plots
+      print(plots)
 
-# Standard curves for each antigen
-plots <- standard_mfi_df %>%
-  split(.$Antigen) %>%
-  map(~ {
-    # Calculate correlation and R-squared for each Subclass
-    correlation_values <- .x %>%
-      group_by(Subclass) %>%
-      do(calculate_correlation(.))
-    
-    # Create plot without filtering data and facet by Subclass
-    ggplot(.x, aes(x = Dilution_Factor, y = log10_MFI, color = Subclass)) +
-      geom_point() +
-      geom_smooth(method = "lm", se = FALSE, color = "blue") +
-      labs(x = "Dilution Factor", y = "log10(MFI)", color = "Subclass") +
-      ggtitle(paste("MFI Standard curve for Antigen:", unique(.x$Antigen))) +
-      theme_minimal() +
-      facet_wrap(~ Subclass, scales = "free_y") +
-      # Add R-squared values
-      geom_text(data = correlation_values, aes(label = paste("R^2 =", round(r_squared, 2))),
-                x = Inf, y = -Inf, hjust = 1, vjust = 0)
-  })
 
-# Print the plots
-print(plots)
 
 ```
 
@@ -175,7 +184,7 @@ standard_antigen <- "AMA1"
 ```
 
 ```{r Standard Ag plots, echo=FALSE, warning=FALSE}
-# No further input required
+# No input required
 
     # Filter data for the standard antigen
     standard_filtered_data <- standard_mfi_df %>% 
@@ -186,16 +195,16 @@ standard_antigen <- "AMA1"
       filter(Dilution_Factor != 0 & !is.na(log10_MFI))
     
     # Create a function to calculate correlation and R-squared for each subset
-    calculate_correlation <- function(data) {
+    calculate_correlation2 <- function(data) {
       correlation <- cor(data$Dilution_Factor, data$log10_MFI, method = "pearson")
       r_squared <- correlation^2
       return(data.frame(correlation = correlation, r_squared = r_squared))
     }
     
     # Calculate correlation and R-squared for each subset (facet)
-    correlation_values <- standard_filtered_data %>%
+    correlation_values2 <- standard_filtered_data %>%
       group_by(Subclass) %>%
-      do(calculate_correlation(.))
+      do(calculate_correlation2(.))
     
     # Create scatterplot with filtered data and facet by Subclass
     standard_plot <- ggplot(standard_filtered_data, aes(x = Dilution_Factor, y = log10_MFI)) +
@@ -206,7 +215,7 @@ standard_antigen <- "AMA1"
       theme_minimal() +
       facet_wrap(~ Subclass, scales = "free_y") +
       # Add R-squared values
-      geom_text(data = correlation_values, aes(label = paste("R^2 =", round(r_squared, 2))),
+      geom_text(data = correlation_values2, aes(label = paste("R^2 =", round(r_squared, 2))),
                 x = Inf, y = -Inf, hjust = 1, vjust = 0)
     
     # Print the plot
@@ -226,7 +235,7 @@ This reference dilution is used to calculate the `Correction_Factor`
 Using `standard_antigen`, we will plot and store the line of best for the standard curve from each plate. 
 
 ```{r Line of best fit- Plates, echo=FALSE, warning=FALSE}
-
+# No input required
       # Calculate Pearson correlation coefficient and line of best fit equation
       correlation <- standard_filtered_data %>%
         group_by(Plate) %>%
@@ -280,7 +289,7 @@ Select a `Dilution_Factor` within the linear log10(MFI) region of the `standard_
 # Select a Dilution factor where the standard curves are consistently linear
 scaling_dilution_factor <- -3
 
-# No further input required
+# No input required
       # Plate best fit line calculation for the dilution factor
       standards_plate_stats$bestfit_plate <- standards_plate_stats$Slope *scaling_dilution_factor + standards_plate_stats$Y_intercept
       
