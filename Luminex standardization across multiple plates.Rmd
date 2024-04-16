@@ -83,39 +83,50 @@ This code is extracting standards data from all plates. The list of `Plates` is 
                 standards_df <- standards_df %>%
                   select(Sample, Dilution_Factor, everything())  
           
-          # Categorize MFI columns
-            standard_mfi_cols <- names(standards_df)[sapply(standards_df, is.numeric) & names(standards_df) != "Dilution_Factor"]
-          
+          # Create Plate column
+              # Function to get Plate value for each row
+              get_plate_value <- function(row) {
+                non_empty_values <- na.omit(row)
+                if (length(non_empty_values) == 0) {
+                  return(NA_character_)
+                } else {
+                  return(non_empty_values[1])
+                }
+              }
+              
+              # Identify columns containing "Plate_"
+              plate_cols <- grep("Plate_", names(standards_df), value = TRUE)
+              
+              # Create Plate column in standards_df
+              standards_df <- standards_df %>%
+                mutate(Plate = apply(standards_df[plate_cols], 1, get_plate_value))
+              
+          # Categorize MFI columns: all numerical columns that are not Dilution_Factor
+              standard_mfi_cols <- names(standards_df)[sapply(standards_df, is.numeric) & 
+                                         names(standards_df) != "Dilution_Factor"]
+            
+        # Create standard_mfi_df containing only numeric columns
+            standard_mfi_df <- standards_df %>%
+              select(Plate, where(is.numeric))
+
+        # Gather MFI columns into long format
+        standard_mfi_df <- tidyr::gather(standards_df, key = "Ab_Ag", value = "MFI", all_of(standard_mfi_cols))
+              
+              # Filter out rows where MFI is NA
+              standard_mfi_df <- standard_mfi_df %>%
+                filter(!is.na(MFI))
+
           # Extract the part of the column name after "_"
             mfi_names <- gsub(".*_", "", standard_mfi_cols)
-          
-          # Gather MFI columns into long format
-            standard_mfi_df <- tidyr::gather(standards_df, key = "Ab_Ag", value = "MFI", all_of(standard_mfi_cols))
-          
+        
           # Create Antigen groups
             standard_mfi_df <- standard_mfi_df %>%
               mutate(Antigen = gsub(".*_", "", Ab_Ag))
+            (Plate = apply(standard_mfi_df[plate_cols], 1, get_plate_value))
             
           # Create log10_MFI column (reduce later analysis errors)
             standard_mfi_df <- standard_mfi_df %>%
               mutate(log10_MFI = log10(MFI))
-            
-          #Create Plate column
-              # Function to get Plate value for each row
-                get_plate_value <- function(row) {
-                  non_empty_values <- na.omit(row)
-                  if (length(non_empty_values) == 0) {
-                    return(NA_character_)
-                  } else {
-                    return(non_empty_values[1])
-                  }
-                }
-              # Identify columns containing "Plate_"
-                plate_cols <- grep("Plate_", names(standards_df), value = TRUE)
-              
-              # Create Plate column in standard_mfi_df
-                standard_mfi_df <- standard_mfi_df %>%
-                  mutate(Plate = apply(standard_mfi_df[plate_cols], 1, get_plate_value))
   
              # Create Antigen and Subclass columns based on Ab_Ag column
                 standard_mfi_df <- standard_mfi_df %>%
@@ -123,6 +134,12 @@ This code is extracting standards data from all plates. The list of `Plates` is 
                     Subclass = sub("_.+", "", Ab_Ag),  # Extract what's before the "_"
                     Antigen = sub(".+_", "", Ab_Ag)    # Extract what's after the "_"
                   )
+
+        # Select specific columns
+        standard_mfi_df <- standard_mfi_df %>%
+          select(Plate, Subclass, Antigen, MFI, log10_MFI)
+
+          
 # show Plates 
     print(unique(standard_mfi_df$Plate))
     
@@ -155,6 +172,7 @@ This is the standard curve for each antigen. Pick which curve behaves logarithmi
           correlation_values <- .x %>%
             group_by(Subclass) %>%
             do(calculate_correlation(.))
+          
           # Create plot without filtering data and facet by Subclass
           ggplot(.x, aes(x = Dilution_Factor, y = log10_MFI, color = Subclass)) +
             geom_point() +
@@ -258,7 +276,7 @@ Using `standard_antigen`, we will plot and store the line of best for the standa
       
       # Create a dataframe to store Plate, line of best fit equation, and R-squared values
       standards_plate_stats <- data.frame(
-        Plate = correlation$Plate, Slope=correlation$slope, Y_intercept = correlation$intercept,
+        Plate = correlation$Plate, Subclass= standard_filtered_data$Subclass,Slope=correlation$slope, Y_intercept = correlation$intercept,
         Fit_line = paste("y =", round(correlation$slope, 2), "x +", round(correlation$intercept, 2)),
         R_squared = round(correlation$r_squared, 2)
       )
@@ -268,15 +286,13 @@ Using `standard_antigen`, we will plot and store the line of best for the standa
               select(Plate, Fit_line, R_squared)
             selected_columns
 
-# Calculate average slope and intercept
-average_slope <- mean(correlation$slope)
-average_intercept <- mean(correlation$intercept)
-
-    #Average fit line 
-      # Create a single line of best fit equation using the average slope and intercept
-average_fit_line <- paste("y =", round(average_slope, 2), "x +", round(average_intercept, 2))
-
-
+      # Calculate average slope and intercept
+      average_slope <- mean(correlation$slope)
+      average_intercept <- mean(correlation$intercept)
+      
+          #Average fit line 
+            # Create a single line of best fit equation using the average slope and intercept
+      average_fit_line <- paste("y =", round(average_slope, 2), "x +", round(average_intercept, 2))
 ```
 ### 2. Average line of best fit
 
@@ -304,6 +320,11 @@ scaling_dilution_factor <- -3
     
     selected_columns
 ```
+
+
+
+
+
 
 This assumes *linearity* of the correlation. The `bestfit_plate` is the `Fit_line` calculation for `scaling_dilution_factor`. The `bestfit_all` is the same calculation for the `average_fit_line`. The `scaling_factor` will be used on the MFI data from each plate in the compiled dataframe
 
