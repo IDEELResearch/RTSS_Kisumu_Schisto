@@ -1,0 +1,234 @@
+---
+title: "LuminexCompilation (Sahal's code)"
+author: "Sahal Thahir & Jeff Bailey"
+date: "2024-04-04"
+output:
+  pdf_document: default
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+
+
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set()
+```
+
+## Aim
+
+This code aims to do a plate- level quality control analysis for Luminex
+studies through bead counts, Background MFI, and Standard curve
+analysis.
+
+### R Markdown
+
+This is an R Markdown document, areas that between the `{r}` frames that
+are require manual entries as described in the **bolded text**. When
+entries are completed, press the *knit* button at the top of the page.
+
+```{=html}
+<!-- *Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. #When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this with `and`* /
+--->
+```
+```{=html}
+<!--
+DEVELOPER NOTES
+#useful links BSA corrected-- <https://docs.google.com/spreadsheets/d/1kFEW7UqGGvfmOtYQq_AdP3V2w7LwdhDLpTHPmPaJGnM/edit#gid=1434210263>
+
+#TODO: potential transplate normalization based on standards
+
+-->
+```
+```{r Library loads, include=FALSE}
+# No input required
+            library(tidyverse)
+            library(here)
+```
+
+#### Dependencies
+
+-   `r R.version.string`
+    -   `tidyverse` (v. `r packageVersion("tidyverse")`)
+    -   `here` (v. `r packageVersion("here")`)
+    
+```{r Raw file extraction}
+# Directory (raw Xponent data) and Loop initiation ----
+directory <- "data/raw/luminex/"
+
+# No further input required
+    # Get list of CSV files in the directory
+    csv_files <- list.files(directory, pattern = "\\.csv$", full.names = TRUE)
+    
+    # Loop through each CSV file
+    for (file_path in csv_files) {
+
+# Median MFI ----
+  # results_df: File Extraction, initial triming, BSA subtraction for Median MFI data ---- 
+      lines <- readLines(file_path)
+      
+      # Median MFI trimming by rows: Below "Median" and two above "Net MFI"    
+            # Find the row index containing the word "Median"
+            median_row_index <- grep("Median", lines)
+            
+            # Find the row index containing the word "Net MFI"
+            net_mfi_row_index <- grep("Net MFI", lines)
+            
+            # Find the row index of two rows above "Net MFI"
+            net_mfi_row_index <- net_mfi_row_index - 2
+      
+            # Extract data between "Median" and two rows above "Net MFI"
+            data_lines <- lines[(median_row_index + 1):net_mfi_row_index]
+      
+        # Create a data frame
+        results_df <- read.csv(text = paste(data_lines, collapse = "\n"), na.strings = "")
+                
+  # Trimming results_data , adding columns (Plate, Site), editing serology names  ----
+     # Creation of results_df: Filter out columns between "Location" and "Total.Events"
+        location_index <- grep("Location", colnames(results_df))
+        total_events_index <- grep("Total.Events", colnames(results_df))
+        columns_to_keep <- (location_index + 1):(total_events_index - 1)
+        
+        results_df <- results_df[, columns_to_keep]
+        
+     # BSA Subtraction
+           # Assuming BSA column index is known
+            bsa_index <- grep("BSA", colnames(results_df))
+            
+                  # Store the BSA column separately
+                  bsa_values <- results_df[, bsa_index]
+                  
+                  # Identify numerical columns excluding BSA
+                  nonBSA_numerical_columns <- sapply(results_df[, -bsa_index], is.numeric)
+            
+            # Subtract BSA from numerical columns
+            results_df[, nonBSA_numerical_columns] <- results_df[, nonBSA_numerical_columns] - bsa_values
+              
+                  # Reinsert the BSA column
+                  results_df[, bsa_index] <- bsa_values
+                  
+            # All negative MFIs to zero
+                  results_df[results_df < 0] <- 0
+            
+     # Adding serology type to numerical column names, Plate column (Plate_Serology)
+          # CSV file name without the extension
+              file_name <- basename(file_path)
+              file_name_without_ext <- tools::file_path_sans_ext(file_name)
+          
+          
+          # Split Plate column by "_"
+              plate_split <- strsplit(as.character(file_name_without_ext), "_")
+          
+          # Extract the second part ("serology")
+              serology <- sapply(plate_split, function(x) x[2])
+          
+          # Add serology type to the numerical column names
+              numerical_columns <- sapply(results_df, is.numeric)
+              numerical_column_names <- names(results_df)[numerical_columns]
+              
+              new_numerical_column_names <- paste0(serology, "_", numerical_column_names)
+              
+              # Rename the numerical columns
+              names(results_df)[numerical_columns] <- new_numerical_column_names
+          
+          # Add Plate_serology type column
+              results_df[[paste0("Plate_", serology)]] <- file_name_without_ext
+          
+
+  # File Export w/ Plate names in data/clean/luminex ----
+    
+      # Extract filename without extension
+            file_name <- basename(file_path)
+            file_name_without_ext <- tools::file_path_sans_ext(file_name)
+    
+      # Rename the data frame with the filename included
+          assign(paste0(file_name_without_ext, "_results_df"), results_df)
+          
+      # Export the final data frame to clean data/luminex
+          export_path <- "data/clean/luminex/"
+          export_file <- paste0(export_path, file_name_without_ext, "_results_df.csv")
+          write.csv(results_df, file = export_file, row.names = FALSE)
+
+
+} #ending loop
+```
+
+```{r Compiling all plates}
+ # Read each CSV file into a list of data frames
+      list_of_dfs <- lapply(list.files(path = directory, pattern = "\\.csv$", full.names = TRUE), 
+                            function(file) read.csv(file, na.strings = c("NA", "NaN")))
+      
+      # Combine data frames by binding rows
+      all_plates_df <- bind_rows(list_of_dfs)
+
+            # Remove commas and convert to numeric for numerical columns
+            all_plates_df <- all_plates_df %>%
+              mutate(across(where(is.numeric), ~as.numeric(gsub(",", "", .))))
+            
+            # Replace remaining NAs with blanks
+            all_plates_df <- all_plates_df %>%
+              replace_na(replace = list(. = ""))
+
+      # Move Plate_ columns to the end of df
+        plate_columns <- grep("^Plate_", colnames(all_plates_df))
+        all_plates_df_reordered <- cbind(all_plates_df[, -plate_columns], all_plates_df[, plate_columns])
+        all_plates_df <- all_plates_df_reordered
+
+# Summarize serology columns. If multiple values, use mean
+      summary_function <- function(x) {
+        if(is.numeric(x)) {
+          mean(x, na.rm = TRUE)  # Add na.rm = TRUE here
+        } else {
+          toString(unique(x))
+        }
+      }
+
+# Create rtss_df: All study participant samples with Sample value starting with "R"
+      # Create rtss_df: All study participant samples with Sample value starting with "R"
+      rtss_df <- all_plates_df %>%
+        filter(grepl("^R", Sample)) %>%
+        group_by(Sample) %>%
+        mutate(across(everything(), ~ if (is.numeric(.)) replace(., . == "NaN", NA) else .))
+      
+      # Convert any non-numeric columns to their original class
+      rtss_df <- mutate(rtss_df, across(where(function(x) !is.numeric(x)), as.character))
+      
+
+  # Study participant RID 
+          # Sample RX(C/M)-### should become RID RX-###
+                extract_rid <- function(sample) {
+                  # Use regular expression to extract the RID
+                  rid <- sub("([A-Z]{2})[C|M]-([0-9]+).*", "\\1-\\2", sample)
+                  return(rid)
+                }
+          
+          # Apply the function to the Sample column and create a new column called "RID"
+          rtss_df <- rtss_df %>%
+            mutate(RID = extract_rid(Sample))
+          
+          # Reorder the columns with RID at the front
+          rtss_df <- rtss_df %>%
+            select(RID, everything())
+          
+  # Timepoint
+          # Add "-M01" to maternal sample IDs
+          rtss_df <- rtss_df %>%
+            mutate(Sample = ifelse(grepl("M", Sample) & !grepl("-M01", Sample), paste(Sample, "-M01", sep = ""), Sample))
+          
+          # Create Timepoint from Sample 
+          rtss_df$Timepoint <- sapply(strsplit(rtss_df$Sample, "-"), function(x) x[3])
+          
+       
+              # Move Timepoint to after RID
+                  rtss_df <- rtss_df %>%
+                    select(RID, Timepoint, everything())
+
+# rtss_df export
+       # File path for export
+          file_path <- "data/clean/Luminex_comp.csv"
+                  
+      # Dataframe export
+            write.csv(rtss_df, file = file_path, row.names = FALSE)
+
+```
