@@ -307,7 +307,16 @@ the standard curve from each plate.
           slope = lm(log10_MFI ~ Dilution_Factor)$coefficients[2],
           r_squared = summary(lm(log10_MFI ~ Dilution_Factor))$r.squared
         )
-      
+
+```
+
+### 2. Average line of best fit for each Subclass
+
+The average line of best for each `Subclass` will be determined and
+listed below (this assumes both the plate and subclass type are the
+causes for variation in the standard curve)
+```{r Average line (s) of best fit, warning=FALSE}
+
       # Create average fit lines for each Subclass
       average_fit_lines <- correlation %>%
         group_by(Subclass) %>%
@@ -322,14 +331,7 @@ the standard curve from each plate.
                     select(Subclass, average_fit_line)
        selected_columns
             
-
 ```
-
-### 2. Average line of best fit
-
-The average line of best for each `Subclass` will be determined and
-listed below (this assumes both the plate and subclass type are the
-causes for variation)
 
 ### 3. Determine scaling factor
 
@@ -338,12 +340,12 @@ Select a `Dilution_Factor` within the linear log10(MFI) region of the
 determined as the ratio between the values of the plate line of best fit
 and the average line of best fit (Subclass specific) at that dilution.
 
-```{r echo=FALSE, warning=FALSE}
+```{r Define Dilution Scaling factor, echo=FALSE, warning=FALSE}
 # Select a Dilution factor where the standard curves are consistently linear
 scaling_dilution_factor <- -3
 ```
 
-```{r}
+```{r Calculate Scaling Factor}
 # No input required (Skip this chunk) 
      # Join the average slope and intercept from average_fit_lines to standard_antigen_stats based on matching Subclass values
       standard_antigen_stats <- standard_antigen_stats %>%
@@ -379,7 +381,7 @@ This is what happened to the log10 data of `r standard_antigen`. Note
 that `scaling_factor` is determined for log10(MFI), not raw MFI.
 
 
-```{r Testing on standard antigen chunk, echo=FALSE, warning=FALSE}
+```{r Testing scaling on standard antigen chunk, echo=FALSE, warning=FALSE}
 #No input required (Skip this chunk)
       test <- standard_antigen_data
       
