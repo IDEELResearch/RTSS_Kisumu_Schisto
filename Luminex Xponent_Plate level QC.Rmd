@@ -92,11 +92,8 @@ file_path <- "data/qc"
 
 # Quality Control
 
-## Bead count (Input required)
-
-```{r Bead QC output filepath, echo=TRUE, warning=FALSE}
-
-```
+### Bead count per Antigen
+  This code assists in check if low bead counts are associated with specific antigens. Note the plot below is not oriented as a 96-well plate given it displays multiple antigens per well. 
 
 ```{r Bead count analysis, echo=FALSE, fig.height=17, fig.width=10, warning=FALSE}
 # No input required
@@ -133,7 +130,7 @@ file_path <- "data/qc"
                 beadqc_long$Value <- as.numeric(beadqc_long$Value)
           
             # Create the title
-              title <- paste("Quality Control: Bead Count",gsub(".csv", "", basename(input_file)))
+              title <- paste("Quality Control: Bead count for each antigen",gsub(".csv", "", basename(input_file)))
               
          
            # Create the heatmap
@@ -154,40 +151,75 @@ file_path <- "data/qc"
      
 ```
 
-### List of wells/analytes \<50 beads
+### Bead Count: per well
 
-This code results in a list of wells, sample IDs, and analytes that are
-less than the minimum bead count set. This file is exported to
-`file_path` (chosen above) as *PlateName_beadqc_list.csv*. Values in
+This code results in a 96 plate- well schematic indicating wells with low wells. A :ist of wells, sample IDs, and analytes that are less than the minimum bead count set. This file is exported to
+`file_path` (chosen above) as *PlateName_beadqc_low_df.csv*. Values in
 this list will be `Na` in the Median MFI dataframe. `file_path`:
 `r file_path` (this can be edited in the **Bead Count** section)
 
 ```{r Low bead count list, echo=FALSE}
 # No input required
-     # Replace <50 bead as "Low"
-              for (col in names(beadqc_df)[sapply(beadqc_df, is.numeric)]) {
-                beadqc_df[[col]][beadqc_df[[col]] < min_beadcount] <- "Low"
-              }
-      # List of low wells
-                  # Filter the dataframe to get rows where value is "Low"
-                  beadqc_list <- beadqc_df %>%
-                    gather(Column, Value, -Location, -Sample) %>%
-                    filter(Value == "Low") %>%
-                    select(Location, Sample, Column)
-                  
-                  # If you want to reset rownames
-                  rownames(beadqc_list) <- NULL
-                  
-                  # Export filepath + Plate name in csv
-                  output_file_list <- file.path(file_path, 
-                    paste0(tools::file_path_sans_ext(basename(input_file)), "_beadqc_list.csv"))
-                  
-                  # Export the beadqc_list as a CSV file
-                  write.csv(beadqc_list, file = output_file_list, row.names = FALSE)
-                  
-                  # Print a message indicating the export was successful
-                  cat("The bead QC list has been exported to", output_file_list, "\n")
-                  beadqc_list
+
+        # Replace <50 bead as "Low"
+        for (col in names(beadqc_df)[sapply(beadqc_df, is.numeric)]) {
+          beadqc_df[[col]][beadqc_df[[col]] < min_beadcount] <- "Low"
+        }
+        
+        # Dataframe of low wells (beadqc_low_df)
+        beadqc_low_df <- beadqc_df %>%
+          gather(Column, Value, -Location, -Sample) %>%
+          filter(Value == "Low") %>%
+          select(Location, Sample, Column) %>%
+          rename(Antigen = Column) %>%
+          mutate(Plate = gsub("\\.csv$", "", basename(input_file)))
+        
+        # Export filepath + Plate name in csv
+        output_file_list <- file.path(file_path, 
+                                      paste0(tools::file_path_sans_ext(basename(input_file)), "_beadqc_low_df.csv"))
+        
+        # Export the beadqc_low_df as a CSV file
+        write.csv(beadqc_low_df, file = output_file_list, row.names = FALSE)
+        
+        # Create well schematic
+                # Extract row and column indices from Location
+                beadqc_low_df$row_col <- gsub(".*,(.*)\\)", "\\1", beadqc_low_df$Location)
+                beadqc_low_df$row <- gsub("\\(.*", "", gsub(".*\\)", "", beadqc_low_df$Location))
+                beadqc_low_df$col <- gsub(".*\\)", "", gsub("\\(.*", "", beadqc_low_df$Location))
+                
+                # Create plate layout with row_col column
+                plate_layout <- expand.grid(
+                  row = LETTERS[1:8],
+                  col = as.character(1:12)
+                )
+                plate_layout$row_col <- paste0(plate_layout$row, plate_layout$col)
+                
+                # Merge with low well locations to mark low wells
+                plate_layout$is_low <- plate_layout$row_col %in% beadqc_low_df$row_col
+                
+                # Generate the plot
+                title <- paste("96-well schematic of Plate: ", gsub(".csv", "", basename(input_file)))
+                plate_plot <- ggplot(plate_layout, aes(x = col, y = row, fill = is_low)) +
+                  geom_tile(color = "black") +
+                  scale_fill_manual(values = c("deepskyblue3", "darkred"), labels = c("Passed", "Low bead count")) +
+                  labs(x = "Column", y = "Row", title = title, fill = "Bead Count") +
+                  theme_minimal() +
+                  theme(axis.text.x = element_text(angle = 0, vjust = 0.5, hjust = 1),
+                        axis.text.y = element_text(angle = 0, vjust = 0.5, hjust = 1)) +
+                  guides(fill = guide_legend(title = "Bead count QC"))
+                
+                # Modify the y-axis to have the top row as "A" and the bottom row as "H"
+                plate_plot <- plate_plot + scale_y_discrete(limits = rev(levels(factor(plate_layout$row))))
+                
+       # Display the plot
+          plate_plot
+
+        # Display list
+          selected_columns <- beadqc_low_df %>% select(Location, Sample, Antigen, Plate)
+        selected_columns
+        
+        # Print a message indicating the export was successful
+        cat("The bead QC list has been exported to", output_file_list, "\n", "This file will be added to in data/qc/qc_compile.csv")
 ```
 
 ## QC of median MFI data
@@ -217,12 +249,12 @@ as well
               # Create a data frame
                 results_df <- read.csv(text = paste(data_lines, collapse = "\n"), na.strings = "")
             
-            # Remove low bead values as NA, using beadqc_list
-                  for (i in 1:nrow(beadqc_list)) {
-                    # Extract information from beadqc_list
-                    location <- beadqc_list$Location[i]
-                    column <- beadqc_list$Column[i]
-                    sample <- beadqc_list$Sample[i]
+            # Remove low bead values as NA, using beadqc_low_df
+                  for (i in 1:nrow(beadqc_low_df)) {
+                    # Extract information from beadqc_low_df
+                    location <- beadqc_low_df$Location[i]
+                    column <- beadqc_low_df$Column[i]
+                    sample <- beadqc_low_df$Sample[i]
                     
                     # Find the row index in results_df where Location and Sample match
                     row_index <- which(results_df$Location == location & results_df$Sample == sample)
