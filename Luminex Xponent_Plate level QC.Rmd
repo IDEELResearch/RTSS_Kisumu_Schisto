@@ -82,7 +82,7 @@ For example, here "Project/data/qc" folder is where the
 
 ```{r Required Inputs, echo=TRUE, warning=TRUE}
 # Choose the input file
-input_file <- "data/raw/luminex/Ahero_IgG1_Test.csv"
+input_file <- "data/raw/Ahero_IgG1_Test.csv"
 # Minimum bead count for analysis
 min_beadcount <- 50
 
