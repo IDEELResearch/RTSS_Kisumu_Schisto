@@ -55,14 +55,27 @@ These code chunks collectively conduct plate-level quality control analysis for 
 
 **Library Loads:** Loads required R libraries, tidyverse and here, necessary for data manipulation and file management tasks.
 
-1.  **Required Inputs:** Provides a section for required inputs, including the working directory, input file path, minimum bead count, and output file path.
+  1. **Required Inputs:**
+        Prompts users to specify the working directory, input file, minimum bead count, and output file path.
 
-2.  **Quality Control:**
+  2. **Quality Control - Bead count per Antigen:**
+        Extracts bead count data from the input file and creates a heatmap visualization.
 
-    -   **Bead Count Analysis:** Reads the input CSV file, extracts bead count data, creates a heatmap visualization of bead counts per well, and exports the heatmap as a PNG file. Additionally, it generates a list of wells with bead counts below the specified minimum, exports it as a CSV file, and prints a message confirming the export.
-    -   **Background Median MFI Analysis:** Calculates the average median MFI for background and non-background samples, creates a bar graph visualization comparing background and non-background MFI values for each analyte, and exports the graph.
-    -   **Standard Curve Analysis:** Extracts standard samples, identifies dilution factors, and creates standard curve plots for each analyte. These plots visualize the relationship between the dilution factor and the logarithmic intensity of the analyte, facilitating standard curve analysis for the dataset.
+  3. **Bead Count: per well:**
+        Identifies wells with low bead counts and generates a schematic representation of the plate layout.
+        Exports a list of wells with low bead counts to a CSV file.
 
+  4. **QC of median MFI data:**
+        Extracts median MFI data from the input file and removes values with bead counts below the specified threshold.
+        Performs BSA subtraction if necessary.
+
+  5. **Background MFI:**
+        Averages the median MFI values for background and non-background samples and visualizes the results with a bar graph.
+
+  6. **Standard curve:**
+        Extracts standard curve data from the input file and creates standard curves for each analyte.
+        The code runs separately for each analyte and produces individual plots.
+        
 ### [Luminex standardization across multiple plates.Rmd]()
 
 These code chunks collectively aim to standardize MFI values across multiple plates in Luminex experiments.

@@ -460,27 +460,26 @@ links for reference during development.</p>
 <p><strong>Library Loads:</strong> Loads required R libraries, tidyverse
 and here, necessary for data manipulation and file management tasks.</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>Required Inputs:</strong> Provides a section for required
-inputs, including the working directory, input file path, minimum bead
-count, and output file path.</p></li>
-<li><p><strong>Quality Control:</strong></p>
-<ul>
-<li><strong>Bead Count Analysis:</strong> Reads the input CSV file,
-extracts bead count data, creates a heatmap visualization of bead counts
-per well, and exports the heatmap as a PNG file. Additionally, it
-generates a list of wells with bead counts below the specified minimum,
-exports it as a CSV file, and prints a message confirming the
-export.</li>
-<li><strong>Background Median MFI Analysis:</strong> Calculates the
-average median MFI for background and non-background samples, creates a
-bar graph visualization comparing background and non-background MFI
-values for each analyte, and exports the graph.</li>
-<li><strong>Standard Curve Analysis:</strong> Extracts standard samples,
-identifies dilution factors, and creates standard curve plots for each
-analyte. These plots visualize the relationship between the dilution
-factor and the logarithmic intensity of the analyte, facilitating
-standard curve analysis for the dataset.</li>
-</ul></li>
+<li><p><strong>Required Inputs:</strong> Prompts users to specify the
+working directory, input file, minimum bead count, and output file
+path.</p></li>
+<li><p><strong>Quality Control - Bead count per Antigen:</strong>
+Extracts bead count data from the input file and creates a heatmap
+visualization.</p></li>
+<li><p><strong>Bead Count: per well:</strong> Identifies wells with low
+bead counts and generates a schematic representation of the plate
+layout. Exports a list of wells with low bead counts to a CSV
+file.</p></li>
+<li><p><strong>QC of median MFI data:</strong> Extracts median MFI data
+from the input file and removes values with bead counts below the
+specified threshold. Performs BSA subtraction if necessary.</p></li>
+<li><p><strong>Background MFI:</strong> Averages the median MFI values
+for background and non-background samples and visualizes the results
+with a bar graph.</p></li>
+<li><p><strong>Standard curve:</strong> Extracts standard curve data
+from the input file and creates standard curves for each analyte. The
+code runs separately for each analyte and produces individual
+plots.</p></li>
 </ol>
 </div>
 <div id="luminex-standardization-across-multiple-plates.rmd" class="section level3">

@@ -315,6 +315,7 @@ the standard curve from each plate.
 The average line of best for each `Subclass` will be determined and
 listed below (this assumes both the plate and subclass type are the
 causes for variation in the standard curve)
+
 ```{r Average line (s) of best fit, warning=FALSE}
 
       # Create average fit lines for each Subclass
@@ -369,6 +370,7 @@ scaling_dilution_factor <- -3
 ```
 
 #### Note:
+
 This assumes *linearity* of the correlation. The `bestfit_plate` is the
 `Fit_line` calculation for `scaling_dilution_factor`. The
 `bestfit_avg_ln` is the same calculation for the `average_fit_line` for
@@ -379,7 +381,6 @@ each plate in the compiled dataframe
 
 This is what happened to the log10 data of `r standard_antigen`. Note
 that `scaling_factor` is determined for log10(MFI), not raw MFI.
-
 
 ```{r Testing scaling on standard antigen chunk, echo=FALSE, warning=FALSE}
 #No input required (Skip this chunk)
