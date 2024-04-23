@@ -2,16 +2,17 @@
 title: "Luminex Xponent: Plate- level Quality Control"
 author: "Sahal Thahir & Jeff Bailey"
 date: "2024-04-04"
+params:
+  input_file: "data/raw/luminex/example.csv"  # Input file path, all files in this folder will be analys
+  min_beadcount: 50  # Minimum bead count for well bead QC
+  min_Rsquared: 0.90 # Minimum R-squared for passing standard curve QC
+  file_path: "data/qc"  # Output filepath for plate level plots and pdfs
 output:
   pdf_document: default
-editor_options: 
-  markdown: 
-    wrap: 72
+---
 ---
 
-```{r setup, include=FALSE}
-
-
+```{r Plate QC- setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set()
 ```
@@ -24,7 +25,7 @@ analysis.
 
 ### R Markdown
 
-This is an R Markdown document, areas that between the `{r}` frames that
+This is an R Markdown document, areas that between the `{r Plate QC-}` frames that
 are require manual entries as described in the **bolded text**. When
 entries are completed, press the *knit* button at the top of the page.
 
@@ -41,10 +42,13 @@ DEVELOPER NOTES
 
 -->
 ```
-```{r Library loads, include=FALSE}
+```{r Plate QC- Library loads, include=FALSE}
 # No input required
             library(tidyverse)
             library(here)
+            library(dplyr)
+            library(ggplot2)
+            library(gridExtra)
 ```
 
 #### Dependencies
@@ -80,22 +84,21 @@ identified.
 For example, here "Project/data/qc" folder is where the
 *PlateName_beadqc_df.csv will be saved*
 
-```{r Required Inputs, echo=TRUE, warning=TRUE}
-# Choose the input file
-input_file <- "data/raw/Ahero_IgG1_Test.csv"
-# Minimum bead count for analysis
-min_beadcount <- 50
-
-#Output file path
-file_path <- "data/qc"
+```{r Plate QC- Required Inputs, echo=TRUE, warning=TRUE}
+#Input here is in YAML
+    # Set Minimum bead count for analysis
+    min_beadcount <- params$min_bead_count
+    
+    # Chose Output file path
+    file_path <- params$file_path
 ```
-
 # Quality Control
 
 ### Bead count per Antigen
   This code assists in check if low bead counts are associated with specific antigens. Note the plot below is not oriented as a 96-well plate given it displays multiple antigens per well. 
 
-```{r Bead count analysis, echo=FALSE, fig.height=17, fig.width=10, warning=FALSE}
+```{r Plate QC- Bead count analysis, echo=FALSE, fig.height=17, fig.width=10, warning=FALSE}
+
 # No input required
       lines <- readLines(input_file)
       # Bead count >50
@@ -158,12 +161,12 @@ This code results in a 96 plate- well schematic indicating wells with low wells.
 this list will be `Na` in the Median MFI dataframe. `file_path`:
 `r file_path` (this can be edited in the **Bead Count** section)
 
-```{r Low bead count list, echo=FALSE}
+```{r Plate QC- Low bead count list, echo=FALSE}
 # No input required
 
         # Replace <50 bead as "Low"
         for (col in names(beadqc_df)[sapply(beadqc_df, is.numeric)]) {
-          beadqc_df[[col]][beadqc_df[[col]] < min_beadcount] <- "Low"
+          beadqc_df[[col]][beadqc_df[[col]] < min_beadcount] <- "Failed QC (bead)"
         }
         
         # Dataframe of low wells (beadqc_low_df)
@@ -175,7 +178,7 @@ this list will be `Na` in the Median MFI dataframe. `file_path`:
           mutate(Plate = gsub("\\.csv$", "", basename(input_file)))
         
         # Export filepath + Plate name in csv
-        output_file_list <- file.path(file_path, 
+        output_file_list <- file.path("data/qc/", 
                                       paste0(tools::file_path_sans_ext(basename(input_file)), "_beadqc_low_df.csv"))
         
         # Export the beadqc_low_df as a CSV file
@@ -230,7 +233,7 @@ as well
 
 *note: negative values are kept*
 
-```{r Median MFI w/ low bead count removal, warning=FALSE, include=FALSE}
+```{r Plate QC- Median MFI w/ low bead count removal, warning=FALSE, include=FALSE}
 #No input required
       # Median MFI ----
             # results_df: File Extraction, initial triming, BSA subtraction for Median MFI data ---- 
@@ -293,7 +296,7 @@ This code averages the median MFI values for all background and
 non-background samples. This requires all Background samples to have
 "Background" within the characters in the `Sample` column
 
-```{r Background Median MFI plot, echo=FALSE}
+```{r Plate QC- Background Median MFI plot, echo=FALSE, fig.width=8, fig.height=6}
 # No input required
         # Analytes: Get the names of numerical columns
           analytes <- names(results_df)[sapply(results_df, is.numeric)]
@@ -346,34 +349,113 @@ For example: \*Standard 2\* will have a `Dilution_factor` of -2
 
 This code will run for all `analyte`
 
-```{r echo=FALSE, warning=FALSE}
-# No input required
-    # Create a standards dataframe
-    standards_df <- results_df %>%
-      filter(str_detect(Sample, "Standard")) %>%
-          # Extract dilution factor from the Sample column and make it negative
-          mutate(Dilution_Factor = as.factor(-as.numeric(str_extract(Sample, "\\d+")))) %>%
-          # Move Dilution_Factor column to the second position
-          select(Sample, Dilution_Factor, everything())
-    
-    # Create Plot
-        # plots_list
-        plots_list <- lapply(analytes, function(analyte) {
-          # Create Title
-            title <- paste(analyte, "standard curve for", gsub(".csv", "", basename(input_file)))
-          # Create plot for the current analyte
-          plot <- ggplot(standards_df, aes(x = Dilution_Factor, y = !!sym(analyte))) +
-            geom_point() +
-            labs(title = title,
-                 x = "Dilution Factor",
-                 y = "Logarithmic Intensity") +
-            scale_y_log10()  # Add log10 scale to y-axis
-          
-          return(plot)
-        })
-       
-        
-        # Display plots
-        plots_list
+```{r Plate QC- plate standard plots, echo=FALSE, warning=FALSE, fig.width=8, fig.height=14}
+# Initialize plate_qc as an empty dataframe
+plate_qc <- data.frame(Analyte = character(), R_squared = numeric())
+
+# Function to calculate correlation and R-squared
+calculate_correlation <- function(df) {
+  lm_model <- lm(Log10_MFI ~ Dilution_Factor, data = df)
+  correlation <- cor(df$Log10_MFI, df$Dilution_Factor)
+  r_squared <- summary(lm_model)$r.squared
+  return(list(correlation = correlation, r_squared = r_squared))
+}
+
+# Step 1: Filter standard samples
+standards_df <- results_df %>%
+  filter(str_detect(Sample, "Standard"))
+
+# Step 2: Extract dilution factor
+standards_df <- standards_df %>%
+  mutate(Dilution_Factor = -as.numeric(str_extract(Sample, "\\d+")))
+
+# Step 3: Identify analyte columns
+analyte_cols <- names(standards_df)[sapply(standards_df, is.numeric) & names(standards_df) != "Dilution_Factor"]
+
+# Step 4: Prepare data for plotting
+melted_df <- standards_df %>%
+  select(-Sample) %>%
+  pivot_longer(cols = all_of(analyte_cols), 
+               names_to = "Analyte", 
+               values_to = "MFI") %>%
+  mutate(Log10_MFI = log10(MFI + 1))  # Adding 1 to avoid log(0)
+
+# Step 5: Create standard curves for each analyte
+plots_list <- lapply(unique(melted_df$Analyte), function(analyte) {
+  # Filter data for the current analyte and remove NA/infinite values
+  analyte_df <- filter(melted_df, Analyte == analyte & !is.na(Log10_MFI) & !is.infinite(Log10_MFI))
+  
+  # Check if analyte_df is empty after filtering
+  if (nrow(analyte_df) == 0) {
+    message(paste("No valid data for analyte:", analyte))
+    return(NULL)
+  }
+  
+  # Create plot
+  plot <- ggplot(analyte_df, aes(x = Dilution_Factor, y = Log10_MFI)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE, color = "blue") + # Add line of best fit
+    labs(title = paste("Standard curve for", analyte),
+         x = "Dilution Factor",
+         y = "Log10(MFI)") +
+    theme_minimal()
+  
+  # Calculate correlation and R-squared
+  correlation_r_squared <- calculate_correlation(analyte_df)
+  
+  # Add R-squared value to the plot annotation
+  plot <- plot + 
+    annotate("text", x = Inf, y = -Inf, 
+             label = paste("R^2 =", round(correlation_r_squared$r_squared, 2)), 
+             hjust = 1, vjust = 0)
+  
+  # Append analyte and R-squared value to plate_qc data frame
+  plate_qc <<- bind_rows(plate_qc, data.frame(Analyte = analyte, R_squared = correlation_r_squared$r_squared))
+  
+  return(plot)
+})
+
+# Combine all plots into a single object
+combined_plots <- do.call(gridExtra::grid.arrange, c(plots_list, ncol = 2))
+
+# Print combined plots
+print(combined_plots)
+
+
+
+```
+
+# QC- Plate standard curve
+The minimum R squared value set for this study is `r min_Rsquared`. In order to pass quality control for appropriate standard curve response, at least one analyte requires a minimum Rsquared > than that value.
+
+```{r Plate QC- R squared, warning=FALSE}
+min_Rsquared <- as.numeric(params$min_Rsquared)
+
+# Remove duplicate rows from plate_qc
+plate_qc <- plate_qc %>%
+  distinct()
+
+# Create min_Rsq column (coercing to logical)
+plate_qc$min_Rsq <- plate_qc$R_squared > min_Rsquared
+plate_qc$min_Rsq <- as.logical(plate_qc$min_Rsq)
+
+
+# View plate_qc
+plate_qc
+
+# Check if any analyte meets the preset minimum R squared value
+if (any(plate_qc$min_Rsq)) {
+  # If at least one analyte meets the criteria
+  print("This plate has passed plate-level quality control for standard curve linearity.")
+  print("At least one analyte meets the criteria for the preset minimum R-squared (see YAML).")
+  print ("Median MFI from this plate will be included in the compiled study dataframe")
+} else {
+  # If no analytes meet the criteria
+  print("This plate has failed plate-level QC for standard curves.")
+  print("No analytes met the preset minimum R-squared.")
+  print("All MFI values from this plate will display as `Failed Plate QC`")
+}
+
+
 
 ```

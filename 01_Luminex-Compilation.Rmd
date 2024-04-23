@@ -9,11 +9,13 @@ editor_options:
     wrap: 72
 ---
 
-```{r setup, include=FALSE}
+```{r Luminex Compilation- setup 1, include=FALSE}
 
 
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set()
+
+
 ```
 
 ## Aim
@@ -41,7 +43,7 @@ DEVELOPER NOTES
 
 -->
 ```
-```{r Library loads, include=FALSE}
+```{r Luminex Compilation- Library loads, include=FALSE}
 # No input required
             library(tidyverse)
             library(here)
@@ -52,8 +54,8 @@ DEVELOPER NOTES
 -   `r R.version.string`
     -   `tidyverse` (v. `r packageVersion("tidyverse")`)
     -   `here` (v. `r packageVersion("here")`)
-    
-```{r Raw file extraction}
+
+```{r Luminex Compilation- Raw file extraction}
 # Directory (raw Xponent data) and Loop initiation ----
 directory <- "data/raw/luminex/"
 
@@ -154,9 +156,9 @@ directory <- "data/raw/luminex/"
 } #ending loop
 ```
 
-```{r Compiling all plates}
+```{r Luminex Compilation- Compiling all plates}
  # Read each CSV file into a list of data frames
-      list_of_dfs <- lapply(list.files(path = directory, pattern = "\\.csv$", full.names = TRUE), 
+      list_of_dfs <- lapply(list.files(path = export_path, pattern = "\\.csv$", full.names = TRUE), 
                             function(file) read.csv(file, na.strings = c("NA", "NaN")))
       
       # Combine data frames by binding rows
