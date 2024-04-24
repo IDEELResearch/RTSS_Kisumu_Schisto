@@ -3,13 +3,27 @@ title: "Luminex Xponent: Plate- level Quality Control"
 author: "Sahal Thahir & Jeff Bailey"
 date: "2024-04-04"
 params:
-  input_file: "data/raw/luminex/example.csv"  # Input file path, all files in this folder will be analys
+  input_file: "data/raw/luminex/example.csv"  # Input file path, all files in this folder will be analyzed
   min_beadcount: 50  # Minimum bead count for well bead QC
   min_Rsquared: 0.90 # Minimum R-squared for passing standard curve QC
   file_path: "data/qc"  # Output filepath for plate level plots and pdfs
 output:
-  pdf_document: default
+  pdf_document:
+    toc: true  # Include table of contents
 ---
+
+```{r toc_generation, echo=FALSE, message=FALSE, warning=FALSE}
+# Generate a list of processed file names
+processed_files <- list.files(params$file_path, pattern = "\\.pdf$", full.names = FALSE)
+
+# Generate the table of contents dynamically based on the processed file names
+cat("\\newpage\n")
+cat("\\tableofcontents\n")
+for (file_name in processed_files) {
+  cat("\\newpage\n")
+  cat("\\section{", file_name, "}\n")
+}
+```
 ---
 
 ```{r Plate QC- setup, include=FALSE}
@@ -349,7 +363,7 @@ For example: \*Standard 2\* will have a `Dilution_factor` of -2
 
 This code will run for all `analyte`
 
-```{r Plate QC- plate standard plots, echo=FALSE, warning=FALSE, fig.width=8, fig.height=14}
+```{r Plate QC- plate standard plots, echo=FALSE, fig.height=14, fig.width=8, warning=FALSE}
 # Initialize plate_qc as an empty dataframe
 plate_qc <- data.frame(Analyte = character(), R_squared = numeric())
 
@@ -428,7 +442,7 @@ print(combined_plots)
 # QC- Plate standard curve
 The minimum R squared value set for this study is `r min_Rsquared`. In order to pass quality control for appropriate standard curve response, at least one analyte requires a minimum Rsquared > than that value.
 
-```{r Plate QC- R squared, warning=FALSE}
+```{r Plate QC- R squared, echo=FALSE, warning=FALSE}
 min_Rsquared <- as.numeric(params$min_Rsquared)
 
 # Remove duplicate rows from plate_qc
@@ -447,12 +461,12 @@ plate_qc
 if (any(plate_qc$min_Rsq)) {
   # If at least one analyte meets the criteria
   print("This plate has passed plate-level quality control for standard curve linearity.")
-  print("At least one analyte meets the criteria for the preset minimum R-squared (see YAML).")
+  print("At least one analyte meets the criteria for the preset minimum R-squared (see min_Rsquared in YAML).")
   print ("Median MFI from this plate will be included in the compiled study dataframe")
 } else {
   # If no analytes meet the criteria
   print("This plate has failed plate-level QC for standard curves.")
-  print("No analytes met the preset minimum R-squared.")
+  print("No analytes met the preset minimum R-squared (see min_Rsquared in YAML).")
   print("All MFI values from this plate will display as `Failed Plate QC`")
 }
 
